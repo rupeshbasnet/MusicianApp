@@ -3,7 +3,15 @@ const models = require('../models');
 
 const router = express.Router();
 
+// This route retrieves a list of all users
+router.get('/', (req, res) => {
+  models.Users.findAll()
+    .then((allUsers) => {
+      res.json(allUsers);
+    })
+});
 
+// Create a new user
 router.post('/', (req, res) => {
   models.Users.create({
     UserName: req.body.username,
@@ -16,6 +24,7 @@ router.post('/', (req, res) => {
   })
 });
 
+// Get a specific user
 router.get('/:id', (req, res) => {
   models.Users.findById(parseInt(req.params.id), {
     include: [{
@@ -45,21 +54,3 @@ router.post('/:id/beats', (req, res) => {
       res.sendStatus(400);
     });
 });
-
-
-router.put('/:id', (req, res) => {
-  res.json({
-    msg: "Successful PUT to '/' route",
-    id: req.params.id
-  });
-});
-
-router.delete('/:id', (req, res) => {
-  res.json({
-    msg: "Successful DELETE to '/' route",
-    id: req.params.id
-  });
-});
-
-
-module.exports = router;

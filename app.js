@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const models = require('./models');
+//const tone = require('tone');
 
 const PORT = process.env.PORT || 8000;
 
@@ -9,16 +10,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-// Uncomment the following if you want to serve up static assets.
-// (You must create the public folder)
-/*
 app.use(express.static('./public'));
-*/
 
-// Uncomment the following if you want to use handlebars
-// on the backend. (You must create the views folder)
-/*
 const exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({
   layoutsDir: './views/layouts',
@@ -26,8 +19,6 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/views/`);
-*/
-
 
 
 // Load up all of the controllers
