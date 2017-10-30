@@ -6,6 +6,8 @@ const models = require('./models');
 const PORT = process.env.PORT || 8000;
 
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,12 +27,27 @@ app.set('views', `${__dirname}/views/`);
 const controllers = require('./controllers');
 app.use(controllers)
 
+io.on('connection', function(socket){
+	socket.on('beat1', function(msg){
+		//console.log(msg);
+		io.emit('beat1', msg);
+	});
+	socket.on('beat2', function(msg){
+		//console.log(msg);
+		io.emit('beat2', msg);
+	});
+});
+
 
 // First, make sure the Database tables and models are in sync
 // then, start up the server and start listening.
-models.sequelize.sync({force: false})
+/*models.sequelize.sync({force: false})
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server is up and running on port: ${PORT}`)
     });
-  });
+  }); */
+
+http.listen(PORT, () => {
+
+});
