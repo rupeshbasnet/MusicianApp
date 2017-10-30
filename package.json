@@ -1,0 +1,23 @@
+{
+  "name": "musicianapp",
+  "version": "1.0.0",
+  "description": "Socket IO Test",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rupeshbasnet/MusicianApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rupeshbasnet/MusicianApp/issues"
+  },
+  "dependencies": {
+    "socket.io": "*",
+    "express": "*"
+  },
+  "homepage": "https://github.com/rupeshbasnet/MusicianApp#readme"
+}
