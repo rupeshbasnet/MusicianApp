@@ -1,6 +1,6 @@
 Nexus.context = Tone.context
 var sequencer = new Nexus.Sequencer('#drum',{
-  'size': [600,188],
+  'size': [600,150],
   'mode': 'toggle',
   'rows': 4,
   'columns': 16
@@ -16,7 +16,7 @@ output = [];
 sequencer.start();
 
 var sequencer2 = new Nexus.Sequencer('#drum2',{
-  'size': [600,188],
+  'size': [600,150],
   'mode': 'toggle',
   'rows': 4,
   'columns': 16
