@@ -1,17 +1,8 @@
 Nexus.context = Tone.context
-
-
-
 output = [];
-
-
 
 /* ------------ Synth ------------ */
 var synth = new Tone.Synth().toMaster();
-
-
-
-
 
 var sequencer = new Nexus.Sequencer('#synth',{
   'size': [600,300],
@@ -37,16 +28,15 @@ sequencer.on('step',function(v) {
 })
 
 
-
-sequencer.on('change',function(v) {
-    var socket = io();
-    socket.emit('beat1', sequencer.matrix.pattern);
-    //console.log(sequencer.matrix.pattern);
-    socket.on('beat1', function( data ) {
-      sequencer.matrix.set.all(data);
-      console.log(data);
-    });
-});
+// sequencer.on('change',function(v) {
+//     var socket = io();
+//     socket.emit('beat1', sequencer.matrix.pattern);
+//     //console.log(sequencer.matrix.pattern);
+//     socket.on('beat1', function( data ) {
+//       sequencer.matrix.set.all(data);
+//       console.log(data);
+//     });
+// });
 
 
 
@@ -77,12 +67,12 @@ sequencer2.on('step',function(v) {
 
 })
 
-sequencer2.on('change',function(v) {
-    var socket = io();
-    socket.emit('beat2', sequencer2.matrix.pattern);
-    //console.log(sequencer.matrix.pattern);
-    socket.on('beat2', function( data ) {
-      sequencer2.matrix.set.all(data);
-      console.log(data);
-    });
-});
+// sequencer2.on('change',function(v) {
+//     var socket = io();
+//     socket.emit('beat2', sequencer2.matrix.pattern);
+//     //console.log(sequencer.matrix.pattern);
+//     socket.on('beat2', function( data ) {
+//       sequencer2.matrix.set.all(data);
+//       console.log(data);
+//     });
+// });
