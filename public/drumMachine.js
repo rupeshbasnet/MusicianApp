@@ -1,6 +1,6 @@
 Nexus.context = Tone.context
-var sequencer = new Nexus.Sequencer('#drum',{
-  'size': [600,150],
+var sequencer = new Nexus.Sequencer('#synth',{
+  'size': [600,300],
   'mode': 'toggle',
   'rows': 4,
   'columns': 16
@@ -15,7 +15,7 @@ var hihat = new Tone.Player({"url" : "/vendor/Samples/hihat.wav", "fadeOut" : 0.
 output = [];
 sequencer.start();
 
-var sequencer2 = new Nexus.Sequencer('#drum2',{
+var sequencer2 = new Nexus.Sequencer('#drums',{
   'size': [600,150],
   'mode': 'toggle',
   'rows': 4,
@@ -69,11 +69,3 @@ sequencer2.on('change',function(v) {
       console.log(data);
     });
 });
-
-
-var oscilloscope = new Nexus.Oscilloscope('#output')
- // or another audio context you have created
-
-oscilloscope.colorize("accent", "black");
-
-oscilloscope.connect( Tone.Master );
