@@ -8,8 +8,7 @@ function start_stop(event) {
       seq.start();
     else {
       seq.stop();
-      while(seq.stepper.value != 0)
-        seq.next();
+      seq.stepper.value = 15;
     }
   }
 
