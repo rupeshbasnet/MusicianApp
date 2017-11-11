@@ -1,4 +1,44 @@
 <div class="container">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Sign Up</button>
+
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Sign Up</h4>
+        </div>
+        <div class="modal-body">
+          <form name="home" action="" method="post">
+            <div class="control-group row">
+              <label>Username</label>
+              <div class="col-10">
+                <input type="text" class="form-control" placeholder="Username" name="username" required data-validation-required-message="Please enter your username.">
+              </div>
+            </div>
+
+            <div class="control-group row">
+              <label>Password</label>
+              <div class="col-10">
+                <input type="password" class="form-control" placeholder="Password" name="password" required data-validation-required-message="Please enter your password.">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default">Send</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="container">
   <div class="row text-center">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <div id = "output"></div>
@@ -9,7 +49,6 @@
       <button id = "start_stop_btn" type = "button" class = "btn btn-success">Start/Stop</button>
       <h2>drums</h2>
 	  <div id = "drums"></div>
-
     </div>
   </div>
 </div>

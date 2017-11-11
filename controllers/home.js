@@ -3,10 +3,16 @@ const models = require('../models');
 
 const router = express.Router();
 
+// router.get('/', (req, res) => {
+//   res.render('sign-up');
+// });
+// console.log("home.js");
 
 router.post('/', (req, res) => {
+  console.log("-------home.js----------");
   models.Users.create({
-    UserName: req.body.username,
+    username: req.body.username,
+    password: req.body.password
   })
   .then((users) => {
     res.json(users);
@@ -15,6 +21,10 @@ router.post('/', (req, res) => {
     res.sendStatus(400);
   })
 });
+
+// router.get('/', (req, res) => {
+//   res.render('home');
+// });
 
 router.get('/:id', (req, res) => {
   models.Users.findById(parseInt(req.params.id), {
