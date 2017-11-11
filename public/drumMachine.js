@@ -14,7 +14,7 @@ var drums = new Tone.Players({
     "fadeOut": "64n",
 }).toMaster();
 
-var sequencer2 = new Nexus.Sequencer('#drums', {
+var drumSequencer = new Nexus.Sequencer('#drums', {
     'size': [600, 150],
     'mode': 'toggle',
     'rows': 4,
@@ -23,41 +23,51 @@ var sequencer2 = new Nexus.Sequencer('#drums', {
 
 var notes = ["Kick", "Sistersnare", "Hat", "Hihat"];
 
-sequencer2.colorize("accent", "orange");
+drumSequencer.colorize("accent", "orange");
 
 var loop = new Tone.Sequence((time, col) => {
-    var column = sequencer2.matrix.column(col);
+    var column = drumSequencer.matrix.column(col);
     for (var i = 0; i < 4; i++) {
         if (column[i]) {
             //console.log("Got in");
             var vel = Math.random() * 0.5 + 0.5;
             drums.get(notes[i]).start(time, 0, "16n", 0, vel);
+            //drumSequencer.next();
         }
     }
 }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "16n");
 
 Tone.Transport.start();
-//sequencer2.start();
+//drumSequencer.start();
 loop.start();
 
-Tone.Transport.bpm.value = 100;
-// sequencer2.on('step', function(v) {
-//     if (v[0] == 1) { kick.start(); }
-//     if (v[1] == 1) { sistersnare.start(); }
-//     if (v[2] == 1) { hat.start(); }
-//     if (v[3] == 1) { hihat.start(); }
 
-//     output = v;
-// });
+var slider = new Nexus.Slider('#slider', {
+    'size': [600, 20],
+    'mode': 'relative', // 'relative' or 'absolute'
+    'min': 80,
+    'max': 200,
+    'step': 1,
+    'value': 0
+})
 
-// sequencer2.on('change',function(v) {
+var number = new Nexus.Number('#tempodisplay')
+Tone.Transport.bpm.value = 80;
+number.link(slider);
+
+slider.on('change', function(v) {
+    console.log(v);
+    Tone.Transport.bpm.value = parseFloat(v);
+})
+
+// drumSequencer.on('change',function(v) {
 //     var socket = io();
-//     socket.emit('beat2', sequencer2.matrix.pattern);
+//     socket.emit('beat2', drumSequencer.matrix.pattern);
 //     //console.log(sequencer.matrix.pattern);
 //     socket.on('beat2', function( data ) {
-//       sequencer2.matrix.set.all(data);
+//       drumSequencer.matrix.set.all(data);
 //       console.log(data);
 //     });
 // });
 
-seqs.push(sequencer2);
+seqs.push(drumSequencer);
