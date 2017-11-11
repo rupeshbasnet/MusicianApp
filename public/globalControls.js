@@ -13,10 +13,8 @@ var slider = new Nexus.Slider('#slider', {
 var loop = new Tone.Sequence((time, col) => {
     //Loop Drum Sequencer
     loopDrum(time, col);
-
     //Loop Synth Sequencer
     loopSynth(time, col);
-    seq.stepper.value = col;
 }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "16n");
 
 Tone.Transport.start();
@@ -32,23 +30,21 @@ slider.on('change', function(v) {
 
 var isRunning = false;
 
-function start_stop(event) {
-    for (seq of seqs) {
-        if (!isRunning) {
-            //seq.start();
-            loop.start();
-            seq.start();
-            seq.stepper.value = 0;
-        } else {
-            //seq.stop();
-            loop.stop();
-            seq.stop();
-            seq.stepper.value = 0;
-            //seq.stepper.value = 15;
-        }
+var textbutton = new Nexus.TextButton('#button', {
+    'size': [150, 50],
+    'state': false,
+    'text': 'Play',
+    'alternate': false,
+    'alternateText': 'Stop'
+})
+
+textbutton.on('change', function(v) {
+    console.log(v);
+    textbutton.alternateText = 'Stop';
+    if (v) {
+        loop.start();
+    } else {
+        loop.stop();
     }
 
-    isRunning = !isRunning;
-}
-
-document.getElementById('start_stop_btn').addEventListener('click', start_stop);
+});

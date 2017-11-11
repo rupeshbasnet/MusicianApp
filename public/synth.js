@@ -11,13 +11,14 @@ synthSequencer.colorize("accent", "black");
 
 var synthNotes = ["C3", "D3", "E3", "F3", "G3", "A3", "B3", "C4"];
 
+
 function loopSynth(time, col) {
     var column = synthSequencer.matrix.column(col);
     for (var i = 0; i < 7; i++) {
         if (column[i]) {
             var vel = Math.random() * 0.5 + 0.5;
             synth.triggerAttackRelease(synthNotes[i], '16n');
-            //synthSequencer.next(); // -- for synthSequencer to work
+            synthSequencer.stepper.value = col;
         }
     }
 }

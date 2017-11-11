@@ -25,13 +25,14 @@ var notes = ["Kick", "Sistersnare", "Hat", "Hihat"];
 
 drumSequencer.colorize("accent", "orange");
 
+
 function loopDrum(time, col) {
     var column = drumSequencer.matrix.column(col);
     for (var i = 0; i < 4; i++) {
         if (column[i]) {
             var vel = Math.random() * 0.5 + 0.5;
             drums.get(notes[i]).start(time, 0, "16n", 0, vel);
-            //drumSequencer.next(); // -- for sequencer to work
+            drumSequencer.stepper.value = col;
         }
     }
 }
