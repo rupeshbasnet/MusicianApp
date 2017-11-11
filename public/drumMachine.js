@@ -25,40 +25,16 @@ var notes = ["Kick", "Sistersnare", "Hat", "Hihat"];
 
 drumSequencer.colorize("accent", "orange");
 
-var loop = new Tone.Sequence((time, col) => {
+function loopDrum(time, col) {
     var column = drumSequencer.matrix.column(col);
     for (var i = 0; i < 4; i++) {
         if (column[i]) {
-            //console.log("Got in");
             var vel = Math.random() * 0.5 + 0.5;
             drums.get(notes[i]).start(time, 0, "16n", 0, vel);
-            //drumSequencer.next();
+            //drumSequencer.next(); // -- for sequencer to work
         }
     }
-}, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "16n");
-
-Tone.Transport.start();
-//drumSequencer.start();
-loop.start();
-
-
-var slider = new Nexus.Slider('#slider', {
-    'size': [600, 20],
-    'mode': 'relative', // 'relative' or 'absolute'
-    'min': 80,
-    'max': 200,
-    'step': 1,
-    'value': 0
-})
-
-var number = new Nexus.Number('#tempodisplay')
-Tone.Transport.bpm.value = 80;
-number.link(slider);
-
-slider.on('change', function(v) {
-    console.log(v);
-    Tone.Transport.bpm.value = parseFloat(v);
-})
+}
 
 // drumSequencer.on('change',function(v) {
 //     var socket = io();
