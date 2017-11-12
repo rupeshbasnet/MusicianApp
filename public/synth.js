@@ -32,5 +32,3 @@ function loopSynth(time, col) {
 //       console.log(data);
 //     });
 // });
-
-seqs.push(synthSequencer);

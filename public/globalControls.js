@@ -1,5 +1,3 @@
-seqs = [];
-
 var slider = new Nexus.Slider('#slider', {
     'size': [600, 20],
     'mode': 'relative', // 'relative' or 'absolute'
@@ -28,8 +26,6 @@ slider.on('change', function(v) {
     Tone.Transport.bpm.value = parseFloat(v);
 })
 
-var isRunning = false;
-
 var textbutton = new Nexus.TextButton('#button', {
     'size': [150, 50],
     'state': false,
@@ -46,5 +42,4 @@ textbutton.on('change', function(v) {
     } else {
         loop.stop();
     }
-
 });

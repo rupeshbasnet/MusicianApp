@@ -46,5 +46,3 @@ function loopDrum(time, col) {
 //       console.log(data);
 //     });
 // });
-
-seqs.push(drumSequencer);
