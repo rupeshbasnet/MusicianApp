@@ -7,7 +7,7 @@ var synthSequencer = new Nexus.Sequencer('#synth', {
     'rows': 8,
     'columns': 16
 })
-synthSequencer.colorize("accent", "black");
+synthSevquencer.colorize("accent", "black");
 
 var synthNotes = ["C3", "D3", "E3", "F3", "G3", "A3", "B3", "C4"];
 
