@@ -13,7 +13,6 @@ router.get('/', (req, res) => {
 
 // Create a new user
 router.post('/', (req, res) => {
-  console.log("-------users.js----------");
   models.Users.create({
     username: req.body.username,
     password: req.body.password
@@ -56,3 +55,5 @@ router.post('/:id/beats', (req, res) => {
       res.sendStatus(400);
     });
 });
+
+module.exports = router;
