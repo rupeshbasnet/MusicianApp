@@ -1,27 +1,39 @@
-'use strict';
-
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('user', {
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
+  const Users = sequelize.define('Users', {
     username: DataTypes.STRING,
-    email: DataTypes.STRING,
     password_hash: DataTypes.STRING,
-    password: DataTypes.VIRTUAL,
+    password: DataTypes.STRING /* change DataTypes to VIRTUAL later on */
   });
 
-  User.beforeCreate((user) =>
-    new sequelize.Promise((resolve) => {
-      bcrypt.hash(user.password, null, null, (err, hashedPassword) => {
-        resolve(hashedPassword);
-      });
-    }).then((hashedPassword) => {
-      user.password = hashedPassword;
+  Users.associate = (models) => {
+    models.Users.hasMany(models.Beats);
+  }
+
+  Users.beforeCreate((user) => {
+    user.email = user.email && user.email.toLowerCase();
+    if (!user.password) return Promise.resolve(user);
+
+    return bcrypt.hash(user.get('password'), 10)
+    .then(hash => {
+      user.set('password_hashed', hash)
     })
-  );
+  });
 
-  return User;
+  Users.prototype.authenticate = (password, hashed_pw) => {
+    return bcrypt.compareSync(password, hashed_pw);
+  }
+
+
+  return Users;
 };
+function setEmailAndPassword(user) {
+  user.email = user.email && user.email.toLowerCase()
+  if (!user.password) return Promise.resolve(user)
 
+  return bcrypt.hash(user.get('password'), 10)
+    .then(hash => {
+      user.set('password_hashed', hash)
+    })
+}
