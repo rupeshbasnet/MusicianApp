@@ -1,5 +1,6 @@
 const express = require('express');
 const models = require('../models');
+const bcrypt = require('bcryptjs');
 
 const router = express.Router();
 
@@ -14,13 +15,30 @@ router.get('/', (req, res) => {
 // Create a new user
 router.post('/', (req, res) => {
   models.Users.create({
-    UserName: req.body.username,
+    username: req.body.username,
+    password: req.body.password
   })
   .then((users) => {
     res.json(users);
   })
   .catch(() => {
     res.sendStatus(400);
+  })
+});
+
+// Authenitcate User
+router.post('/login', (req, res) => {
+  models.Users.findOne( {where: {username: req.body.username}} )
+  .then( (foundUser) => {
+    if(foundUser){
+      if(foundUser.authenticate(req.body.password, foundUser.password_hash))
+        console.log("isMatch !!!!!!!");
+      else
+        console.log("no match !!!!!!!!!!!");
+    }
+    else {
+      console.log("User Not Found");
+    }
   })
 });
 
@@ -54,3 +72,5 @@ router.post('/:id/beats', (req, res) => {
       res.sendStatus(400);
     });
 });
+
+module.exports = router;
