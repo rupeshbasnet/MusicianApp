@@ -12,19 +12,19 @@ router.get('/', (req, res) => {
     })
 });
 
-// Create a new user
-router.post('/', (req, res) => {
-  models.Users.create({
-    username: req.body.username,
-    password: req.body.password
-  })
-  .then((users) => {
-    res.json(users);
-  })
-  .catch(() => {
-    res.sendStatus(400);
-  })
-});
+// // Create a new user
+// router.post('/', (req, res) => {
+//   models.Users.create({
+//     username: req.body.username,
+//     password: req.body.password
+//   })
+//   .then((users) => {
+//     res.json(users);
+//   })
+//   .catch(() => {
+//     res.sendStatus(400);
+//   })
+// });
 
 // Authenitcate User
 // router.post('/login', (req, res) => {
