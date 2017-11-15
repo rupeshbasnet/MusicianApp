@@ -1,7 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const models = require('./models');
-//const tone = require('tone');
+const passport = require('./middlewares/authentication');
 
 const PORT = process.env.PORT || 8000;
 
@@ -11,7 +11,8 @@ const io = require('socket.io')(http);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static('./public'));
 
 const exphbs = require('express-handlebars');
@@ -41,13 +42,13 @@ io.on('connection', function(socket){
 
 // First, make sure the Database tables and models are in sync
 // then, start up the server and start listening.
-/*models.sequelize.sync({force: false})
+models.sequelize.sync({force: false})
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server is up and running on port: ${PORT}`)
     });
-  }); */
+  }); 
 
-http.listen(PORT, () => {
+/*http.listen(PORT, () => {
 
-});
+}); */
