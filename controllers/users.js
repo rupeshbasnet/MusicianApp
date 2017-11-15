@@ -27,20 +27,20 @@ router.post('/', (req, res) => {
 });
 
 // Authenitcate User
-router.post('/login', (req, res) => {
-  models.Users.findOne( {where: {username: req.body.username}} )
-  .then( (foundUser) => {
-    if(foundUser){
-      if(foundUser.authenticate(req.body.password, foundUser.password_hash))
-        console.log("isMatch !!!!!!!");
-      else
-        console.log("no match !!!!!!!!!!!");
-    }
-    else {
-      console.log("User Not Found");
-    }
-  })
-});
+// router.post('/login', (req, res) => {
+//   models.Users.findOne( {where: {username: req.body.username}} )
+//   .then( (foundUser) => {
+//     if(foundUser){
+//       if(foundUser.authenticate(req.body.password, foundUser.password_hash))
+//         console.log("isMatch !!!!!!!");
+//       else
+//         console.log("no match !!!!!!!!!!!");
+//     }
+//     else {
+//       console.log("User Not Found");
+//     }
+//   })
+// });
 
 // Get a specific user
 router.get('/:id', (req, res) => {
