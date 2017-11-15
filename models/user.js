@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
     return bcrypt.hash(user.get('password'), 10)
     .then(hash => {
-      user.set('password_hashed', hash)
+      user.set('password_hash', hash)
     })
   });
 
