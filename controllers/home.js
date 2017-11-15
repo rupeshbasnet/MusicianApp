@@ -3,13 +3,9 @@ const models = require('../models');
 
 const router = express.Router();
 
-// router.get('/', (req, res) => {
-//   res.render('sign-up');
-// });
-// console.log("home.js");
 
+//create new user, for testing
 router.post('/', (req, res) => {
-  console.log("-------home.js----------");
   models.Users.create({
     username: req.body.username,
     password: req.body.password
@@ -22,9 +18,6 @@ router.post('/', (req, res) => {
   })
 });
 
-// router.get('/', (req, res) => {
-//   res.render('home');
-// });
 
 router.get('/:id', (req, res) => {
   models.Users.findById(parseInt(req.params.id), {

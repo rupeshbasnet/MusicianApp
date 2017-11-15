@@ -1,5 +1,6 @@
 const express = require('express');
 const models = require('../models');
+const bcrypt = require('bcryptjs');
 
 const router = express.Router();
 
@@ -22,6 +23,24 @@ router.post('/', (req, res) => {
   })
   .catch(() => {
     res.sendStatus(400);
+  })
+});
+
+// Authenitcate User
+router.post('/login', (req, res) => {
+  models.Users.findOne( {where: {username: req.body.username}} )
+  .then( (foundUser) => {
+    if(foundUser.authenticate(req.body.password, foundUser.password_hash))
+      console.log("isMatch !!!!!!!");
+    else
+      console.log("no match !!!!!!!!!!!");
+    // .then( (isMatch) => {
+    //   console.log("isMatch -------", isMatch);
+    //   if(isMatch)
+    //     console.log("MATCH -----");
+    //   else
+    //     console.log("no Match ----");
+    // })
   })
 });
 
