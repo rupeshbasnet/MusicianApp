@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  
   User.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
