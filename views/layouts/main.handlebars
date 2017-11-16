@@ -22,8 +22,12 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/">Home</a></li>
           <li><a href="/users">Users</a></li>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/signup">Sign Up</a></li>
+          {{#if cur_user}}
+            <li id="logout"><a href="#">Logout</a></li>
+          {{ else }}
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+          {{/if}}
         </ul>
       </div>
     </div>
@@ -41,7 +45,16 @@
   <script type="text/javascript" src="/drumMachine.js"></script>
   <script type="text/javascript" src="/synth.js"></script>
 
-
-
+  {{#if cur_user}}
+  <script>
+    ;(function() {
+      $('#logout').click(function() {
+        $.post("/logout", function() {
+          window.location.href = '/';
+        });
+      });
+    })();
+  </script>
+  {{/if}}
 </body>
 </html>
