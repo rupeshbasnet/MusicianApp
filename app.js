@@ -47,7 +47,7 @@ models.sequelize.sync({force: false})
     app.listen(PORT, () => {
       console.log(`Server is up and running on port: ${PORT}`)
     });
-  }); 
+  });
 
 /*http.listen(PORT, () => {
 
