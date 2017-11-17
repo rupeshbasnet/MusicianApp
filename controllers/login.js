@@ -1,5 +1,7 @@
-const passport = require('../middlewares/authentication');
 const router = require('express').Router();
+const passport = require('../middlewares/authentication');
+const Redirect = require('../middlewares/redirect');
+
 
 router.get('/', (req, res) => {
   res.render('login');
