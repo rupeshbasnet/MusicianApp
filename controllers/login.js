@@ -4,15 +4,18 @@ const Redirect = require('../middlewares/redirect');
 
 
 router.get('/', (req, res) => {
-  res.render('login');
+  res.render('login', {
+    status: req.flash('error')
+  });
+
 });
 
 router.post('/', (req, res) => {
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
+    failureFlash: true
   })(req, res);
-  // res.render('login', {cur_user: true});
 });
 
 module.exports = router;

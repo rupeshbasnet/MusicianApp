@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const models = require('./models');
 const expressSession = require('express-session');
+const flash = require('connect-flash');
 const passport = require('./middlewares/authentication');
 
 const PORT = process.env.PORT || 8000;
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressSession(({ secret: 'apple-tree', resave: false, saveUninitialized: true} )));
 app.use(passport.initialize());
+app.use(flash());
 app.use(passport.session());
 app.use(express.static('./public'));
 
