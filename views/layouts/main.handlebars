@@ -15,7 +15,10 @@
           <span class="sr-only">Toggle navigation</span>
           Menu <i class="fa fa-bars"></i>
         </button>
-        <a class="navbar-brand" href="/">Drum Machine</a>
+        <a class="navbar-brand" href="/">Musician App</a>
+        {{#if cur_user}}
+          <h5>Hello {{cur_user.firstName}} </h5>
+        {{/if}}
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -23,7 +26,6 @@
           <li><a href="/">Home</a></li>
           <li><a href="/users">Users</a></li>
           {{#if cur_user}}
-            {{cur_user.email}}
             <li id="logout"><a href="#">Logout</a></li>
           {{ else }}
             <li><a href="/login">Login</a></li>
