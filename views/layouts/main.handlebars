@@ -23,6 +23,7 @@
           <li><a href="/">Home</a></li>
           <li><a href="/users">Users</a></li>
           {{#if cur_user}}
+            {{cur_user.email}}
             <li id="logout"><a href="#">Logout</a></li>
           {{ else }}
             <li><a href="/login">Login</a></li>

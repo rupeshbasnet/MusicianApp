@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const models = require('./models');
+const expressSession = require('express-session');
 const passport = require('./middlewares/authentication');
 
 const PORT = process.env.PORT || 8000;
@@ -11,6 +12,7 @@ const io = require('socket.io')(http);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressSession(({ secret: 'apple-tree', resave: false, saveUninitialized: true} )));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('./public'));

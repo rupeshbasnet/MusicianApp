@@ -12,7 +12,7 @@ router.post('/', (req, res) => {
     successRedirect: '/',
     failureRedirect: '/login',
   })(req, res);
-  res.render('login', {cur_user: true});
+  // res.render('login', {cur_user: true});
 });
 
 module.exports = router;
