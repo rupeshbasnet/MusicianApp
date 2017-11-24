@@ -2,7 +2,7 @@
 var synth = new Tone.Synth().toMaster();
 
 var synthSequencer = new Nexus.Sequencer('#synth', {
-    'size': [600, 300],
+    'size': [704, 352],
     'mode': 'toggle',
     'rows': 8,
     'columns': 16

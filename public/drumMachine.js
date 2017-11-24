@@ -15,7 +15,7 @@ var drums = new Tone.Players({
 }).toMaster();
 
 var drumSequencer = new Nexus.Sequencer('#drums', {
-    'size': [600, 150],
+    'size': [704, 176],
     'mode': 'toggle',
     'rows': 4,
     'columns': 16
