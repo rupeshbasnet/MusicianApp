@@ -9,12 +9,11 @@ var synthSequencer = new Nexus.Sequencer('#synth', {
 })
 synthSequencer.colorize("accent", "black");
 
-var synthNotes = ["C3", "D3", "E3", "F3", "G3", "A3", "B3", "C4"];
-
+var synthNotes = ["C4", "B3", "A3", "G3", "F3", "E3", "D3", "C3"];
 
 function loopSynth(time, col) {
     var column = synthSequencer.matrix.column(col);
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < 8; i++) {
         if (column[i]) {
             var vel = Math.random() * 0.5 + 0.5;
             synth.triggerAttackRelease(synthNotes[i], '16n');

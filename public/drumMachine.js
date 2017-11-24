@@ -5,10 +5,10 @@ output = [];
 // Used Tone.Players for optimization
 
 var drums = new Tone.Players({
-    "Kick": "/vendor/Samples/kick.wav",
-    "Sistersnare": "/vendor/Samples/sistersnare.wav",
-    "Hat": "/vendor/Samples/hat.wav",
     "Hihat": "/vendor/Samples/hihat.wav",
+    "Hat": "/vendor/Samples/hat.wav",
+    "Sistersnare": "/vendor/Samples/sistersnare.wav",
+    "Kick": "/vendor/Samples/kick.wav"
 }, {
     "volume": "10",
     "fadeOut": "64n",
@@ -21,7 +21,9 @@ var drumSequencer = new Nexus.Sequencer('#drums', {
     'columns': 16
 })
 
-var notes = ["Kick", "Sistersnare", "Hat", "Hihat"];
+
+var notes = ["Hihat", "Hat", "Sistersnare", "Kick" ];
+
 
 drumSequencer.colorize("accent", "orange");
 

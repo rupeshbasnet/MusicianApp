@@ -4,7 +4,7 @@ var slider = new Nexus.Slider('#slider', {
     'min': 60,
     'max': 200,
     'step': 1,
-    'value': 0
+    'value': 120
 })
 
 // Global Loop
