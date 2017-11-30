@@ -11,6 +11,18 @@ router.get('/', (req, res) => {
     })
 });
 
+// This route retrieves a specific beat
+router.get('/:id', (req, res) => {
+  models.Beats.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then((beat) => {
+    res.json(beat);
+  })
+});
+
 router.post('/', (req, res) => {
   models.Beats.create({
     title: req.body.title,
@@ -25,6 +37,8 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   models.Beats.update({
+    title: req.body.title,
+    description: req.body.description,
     beatArray: req.body.beatArray
   }, {
     where: {

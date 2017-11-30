@@ -22,7 +22,6 @@ router.get('/', (req, res) => {
       });
     })
     .then(() => {
-      console.log(beats);
       res.render('homepage', {cur_user: req.user, beats: beats});
     });
 

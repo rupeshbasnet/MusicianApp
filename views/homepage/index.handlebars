@@ -38,10 +38,17 @@
         <input id = "beatTitle" type = "text" name = "title" placeholder = "Title"/>
         <input id = "beatDescription" type = "text" name = "description" placeholder = "Description"/>
         <div>
-          <input id = "beat1" name = "beat" type = "radio" /><input id = "beatId1" type = "hidden" />
-          <input id = "beat2" name = "beat" type = "radio" /><input id = "beatId2" type = "hidden" />
-          <input id = "beat3" name = "beat" type = "radio" /><input id = "beatId3" type = "hidden" />
-          <input id = "beat4" name = "beat" type = "radio" /><input id = "beatId4" type = "hidden" />
+          <input id = "beat0" name = "beat" type = "radio" />
+
+          <input id = "beat1" name = "beat" type = "radio" />
+
+          <input id = "beat2" name = "beat" type = "radio" />
+
+          <input id = "beat3" name = "beat" type = "radio" />
+
+          {{#each beats}}
+            <input id = "beatId{{@index}}" name = "beatId" type = "hidden" value = "{{this.id}}"/>
+          {{/each}}
         </div>
 
         <div id = "save"></div>

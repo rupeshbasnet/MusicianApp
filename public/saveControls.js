@@ -5,6 +5,48 @@ var savebutton = new Nexus.TextButton('#save', {
   'alternate': false,
 });
 
+function loadBeats() {
+  var inputs = document.querySelectorAll('input[name=beat]');
+  var beatIds = document.querySelectorAll('input[name=beatId]');
+
+  function expand(array, rows) {
+    var matrix = [];
+    var subArray = [];
+
+    for(var i = 0; i < rows; i++) {
+      for(var j = 0; j < 16; j++) {
+        subArray.push(array[i*16 + j]);
+      }
+      matrix.push(subArray);
+      subArray = [];
+    }
+    return matrix;
+  }
+
+  for(let i = 0; i < beatIds.length; i++){
+
+    $.get(
+      '/beats/' + beatIds[i].value
+    )
+    .done(function(data, statusText) {
+      inputs[i].addEventListener('click', function(){
+        document.getElementById('beatTitle').value = data.title;
+        document.getElementById('beatDescription').value = data.description;
+        drumSequencer.matrix.set.all(expand(data.beatArray, 4));
+      });
+    });
+
+  }
+
+  if(beatIds.length < inputs.length)
+    for(var i = beatIds.length; i < inputs.length; i++)
+      inputs[i].addEventListener('click', function(){
+        document.getElementById('beatTitle').value = "";
+        document.getElementById('beatDescription').value = "";
+        drumSequencer.matrix.set.all(expand(Array(64).fill(0), 4));
+      });
+}
+
 function newBeat(params) {
   $.post(
     '/beats',
@@ -15,8 +57,15 @@ function newBeat(params) {
   });
 }
 
-function updateBeat() {
-
+function updateBeat(id, params) {
+  $.ajax({
+    url: '/beats/'+id,
+    type: 'PUT',
+    data: params,
+    success: function(result) {
+        // Do something with the result
+    }
+  });
 }
 
 savebutton.on('click', function() {
@@ -42,5 +91,20 @@ savebutton.on('click', function() {
     beatArray: beatArray
   }
 
-  newBeat(parameters);
+  var slotNo = parseInt( document.querySelector('input[name=beat]:checked').id[4] );
+  var beatNo;
+
+  if(slotNo){
+    beatNo = parseInt( document.querySelectorAll('input[name=beatId]')[slotNo].value );
+
+    if(beatNo)
+      updateBeat(beatNo, parameters);
+  }
+
+  if(!beatNo)
+    newBeat(parameters);
+
+  loadBeats();
 });
+
+loadBeats();
