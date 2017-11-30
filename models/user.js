@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.VIRTUAL,
   });
 
+  User.associate = (models) => {
+    models.User.hasMany(models.Beats);
+  }
+
   User.beforeCreate((user) =>
     new sequelize.Promise((resolve) => {
       bcrypt.hash(user.password, null, null, (err, hashedPassword) => {

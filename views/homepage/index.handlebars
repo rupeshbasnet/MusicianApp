@@ -17,7 +17,7 @@
       chat area
     </div>
   </div>
-  
+
   <div class="row">
     <div class="col-lg-4 well" style="min-height: 437px;">
       synth controls
@@ -29,10 +29,26 @@
       <br>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="col-lg-4 well" style="min-height: 261px;">
       drum controls
+      {{#if cur_user }}
+        <br>
+        <input id = "beatTitle" type = "text" name = "title" placeholder = "Title"/>
+        <input id = "beatDescription" type = "text" name = "description" placeholder = "Description"/>
+        <div>
+          <input id = "beat1" name = "beat" type = "radio" /><input id = "beatId1" type = "hidden" />
+          <input id = "beat2" name = "beat" type = "radio" /><input id = "beatId2" type = "hidden" />
+          <input id = "beat3" name = "beat" type = "radio" /><input id = "beatId3" type = "hidden" />
+          <input id = "beat4" name = "beat" type = "radio" /><input id = "beatId4" type = "hidden" />
+        </div>
+
+        <div id = "save"></div>
+
+      {{else}}
+
+      {{/if}}
     </div>
     <div class="col-lg-8 panel panel-default">
       <h2>Drums</h2>
@@ -48,21 +64,21 @@
       <br>
     </div>
   </div>
-  
 
-  
-  
-  
+
+
+
+
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      
+
       <br>
-      
+
       <br>
-      
-	    
+
+
       <br>
-      
+
     </div>
   </div>
 </div>
