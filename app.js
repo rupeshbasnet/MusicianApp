@@ -33,26 +33,32 @@ const controllers = require('./controllers');
 app.use(controllers)
 
 io.on('connection', function(socket){
-	socket.on('beat1', function(msg){
+	socket.on('synth', function(msg){
 		//console.log(msg);
-		io.emit('beat1', msg);
+		io.emit('synth', msg);
 	});
-	socket.on('beat2', function(msg){
+  
+	socket.on('drums', function(msg){
 		//console.log(msg);
-		io.emit('beat2', msg);
+		io.emit('drums', msg);
+	});
+
+  socket.on('tempo', function(msg){
+		//console.log(msg);
+		io.emit('tempo', msg);
 	});
 });
 
 
 // First, make sure the Database tables and models are in sync
 // then, start up the server and start listening.
-models.sequelize.sync({force: false})
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server is up and running on port: ${PORT}`)
-    });
-  });
+// models.sequelize.sync({force: false})
+//   .then(() => {
+//     app.listen(PORT, () => {
+//       console.log(`Server is up and running on port: ${PORT}`)
+//     });
+//   });
 
-/*http.listen(PORT, () => {
+http.listen(PORT, () => {
 
-}); */
+});

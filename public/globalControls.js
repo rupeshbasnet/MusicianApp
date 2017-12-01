@@ -24,7 +24,21 @@ number.link(slider);
 slider.on('change', function(v) {
     console.log(v);
     Tone.Transport.bpm.value = parseFloat(v);
-})
+    //tempoEmit();
+});
+
+//send tempo over socket
+var socket = io();
+socket.on('tempo', function( data ) {
+  slider.value = parseInt(data);
+  //console.log(data);
+});
+
+function tempoEmit(){
+  socket.emit('tempo', slider.value);
+}
+
+$(document).on('mouseup', tempoEmit);
 
 var textbutton = new Nexus.TextButton('#button', {
     'size': [150, 50],
