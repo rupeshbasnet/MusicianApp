@@ -38,7 +38,14 @@ function tempoEmit(){
   socket.emit('tempo', slider.value);
 }
 
-$(document).on('mouseup', tempoEmit);
+// for Desktop, hacky
+$('svg')[0].addEventListener('mousemove', function(e){
+  if(e.buttons == 1)
+    window.addEventListener('mousemove', tempoEmit, { once: true });
+});
+
+// Mobile
+$('svg')[0].addEventListener('touchmove', tempoEmit);
 
 var textbutton = new Nexus.TextButton('#button', {
     'size': [150, 50],
