@@ -9,6 +9,7 @@ router.use('/signup', require('./signup'));
 router.use('/profile', require('./profile'));
 router.use('/logout', require('./logout'));
 router.use('/beats', require('./beats'));
+router.use('/users', require('./users'));
 
 
 router.get('/', (req, res) => {

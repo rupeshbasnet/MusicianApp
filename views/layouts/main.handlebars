@@ -17,7 +17,8 @@
         </button>
         <a class="navbar-brand" href="/">Musician App</a>
         {{#if cur_user}}
-          <p class="navbar-text">Hello {{cur_user.firstName}} </p>
+          <div class="navbar-text">Hello </div><p class = "navbar-text" id = "username"> {{cur_user.firstName}} </i>
+          </p>
         {{/if}}
       </div>
 
@@ -48,6 +49,7 @@
   <script type="text/javascript" src="/saveControls.js"></script>
   <script type="text/javascript" src="/drumMachine.js"></script>
   <script type="text/javascript" src="/synth.js"></script>
+  <script type="text/javascript" src="/chat.js"></script>
 
   {{#if cur_user}}
   <script>
