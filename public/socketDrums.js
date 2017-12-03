@@ -1,10 +1,9 @@
-var socket = io();
-socket.on('drums', function( data ) {
-  drumSequencer.matrix.set.all(data);
-});
+//var socket = io();
 
 function drumsEmit() {
-  socket.emit('drums', drumSequencer.matrix.pattern);
+  socket.emit('drums', 
+  { room: document.getElementById('room').value,
+  	pattern: drumSequencer.matrix.pattern});
 }
 
 for(let cell of $('#drums div').children())
@@ -14,3 +13,8 @@ for(let cell of $('#drums div').children())
 }
 
 $(document).on('mouseup', drumsEmit);
+
+socket.on('drums', function( data ) {
+  //drumSequencer.matrix.set.all(data.pattern);
+  console.log(data);
+});

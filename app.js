@@ -34,38 +34,48 @@ app.use(controllers)
 
 io.on('connection', function(socket){
 	// List for the room.join event and from there join a room
-	// We will get the room name passed in from the client
-	// socket.on('room.join', (room) => {
-	// 	// Log all the rooms
-	// 	console.log(socket.rooms);
-	// 	// Socket will have the keys of everyroom that it is in
-	// 	Object.keys(socket.rooms).filter((r) => r != socket.id)
-	// 	.forEach((r) => socket.leave(r));
+	// We will get the room name "room" passed in from the client
+	socket.on('room.join', (room) => {
+		// Log all the rooms
+		console.log(socket.rooms);
+		// Socket will have the keys of everyroom that it is in
+		// Filter out the rooms that are not the socket
+		Object.keys(socket.rooms).filter((r) => r != socket.id)
+		.forEach((r) => socket.leave(r));  // Leave that room since we want the user to be in only one room
 
-	// 	setTimeout(() => {
-	// 		socket.join(room);
-	// 		socket.emit('event', 'Joined room' + room);
-	// 		socket.broadcast.to(room).emit('event', 'Someone joined room ' + room);
-	// 	}, 0);
-	// });
+		// settimeout to 0 so that it gets in the next evvent loop
+		setTimeout(() => {
+			// Take the "room" and join it
+			socket.join(room);
+			// Emit a socket saying we joined the room
+			socket.emit('event', 'Joined room' + room);
+			// We will broadcast to the room - broadcast will send it to everyone but yourself
+			socket.broadcast.to(room).emit('event', 'Someone joined room ' + room);
+		}, 0);
+	});
 
-	// socket.on('event', (e) => {
-	// 	socket.broadcast.to(e.room).emit('event', e.name + ' says hello!');
-	// });
+	// Listen for the event and if there is an event broadcast it to everyone else.
+	socket.on('event', (e) => {
+		socket.broadcast.to(e.room).emit('event', e.name + ' says hello!');
+	});
 	
-	socket.on('synth', function(msg){
-		//console.log(msg);
-		io.emit('synth', msg);
+	socket.on('synth', (msg) => {
+		console.log(msg);
+		//io.in(msg.room).emit('synth', msg.pattern);
+		socket.broadcast.to(msg.room).emit('synth', msg.pattern);
 	});
   
 	socket.on('drums', function(msg){
-		//console.log(msg);
-		io.emit('drums', msg);
+		console.log(msg);
+		//io.in(msg.room).emit('drums', msg.pattern);
+		socket.broadcast.to(msg.room).emit('drums', msg.pattern);
 	});
 
   	socket.on('tempo', function(msg){
-		//console.log(msg);
-		io.emit('tempo', msg);
+		console.log(msg);
+		//io.in(msg.room).emit('tempo', msg.value);
+		socket.broadcast.to(msg.room).emit('tempo', msg.value);
+
 	});
 });
 
