@@ -60,35 +60,20 @@ io.on('connection', function(socket){
 	});
 	
 	socket.on('tempo', (msg) => {
-		//console.log(msg);
-		//io.in(msg.room).emit('tempo', msg.value);
+		// If we get tempo event we broadcast it to everyone in that room except the sender
 		socket.broadcast.to(msg.room).emit('tempo', msg.val);
-		
 	});
 
 	socket.on('synth', (msg) => {
-		console.log("this is the synth");
-		
-		console.log(msg);
-		//io.in(msg.room).emit('synth', msg.pattern);
-		
+		// If we get synth event we broadcast it to everyone in that room except the sender
 		socket.broadcast.to(msg.room).emit('synth', msg.pattern);
-		
 	});
   
 	socket.on('drums', (msg) => {
-
-		console.log("this is the drums");
-		console.log(msg);
-		
-		//io.in(msg.room).emit('drums', msg.pattern);
-		
-		
+		// If we get drums event we broadcast it to everyone in that room except the sender
 		socket.broadcast.to(msg.room).emit('drums', msg.pattern);
-		
 	});
 
-  	
 });
 
 

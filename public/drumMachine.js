@@ -1,28 +1,23 @@
+Nexus.context = Tone.context
+output = [];
 
+var drumSequencer = new Nexus.Sequencer('#drums', {
+    'size': [704, 176],
+    'mode': 'toggle',
+    'rows': 4,
+    'columns': 16
+})
 
-// drumSequencer.on('change',function(v) {
-//     var socket = io();
-//     socket.emit('beat2', drumSequencer.matrix.pattern);
-//     //console.log(sequencer.matrix.pattern);
-//     socket.on('beat2', function( data ) {
-//       drumSequencer.matrix.set.all(data);
-//       console.log(data);
-//     });
-// });
+var drums = new Tone.Players({
+    "Hihat": "/vendor/Samples/hihat.wav",
+    "Hat": "/vendor/Samples/hat.wav",
+    "Sistersnare": "/vendor/Samples/sistersnare.wav",
+    "Kick": "/vendor/Samples/kick.wav"
+}, {
+    "volume": "10",
+    "fadeOut": "64n",
+}).toMaster();
 
-// var socket = io();
-// socket.on('drums', function( data ) {
-//   drumSequencer.matrix.set.all(data);
-// });
+var notes = ["Hihat", "Hat", "Sistersnare", "Kick" ];
 
-// function drumsEmit() {
-//   socket.emit('drums', drumSequencer.matrix.pattern);
-// }
-
-// for(let cell of $('#drums div').children())
-// {
-//   cell.addEventListener('mouseup', drumsEmit);
-//   cell.addEventListener('touchend', drumsEmit);
-// }
-
-// $(document).on('mouseup', drumsEmit);
+drumSequencer.colorize("accent", "orange");
