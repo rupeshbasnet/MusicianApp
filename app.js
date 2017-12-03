@@ -59,24 +59,36 @@ io.on('connection', function(socket){
 		socket.broadcast.to(e.room).emit('event', e.name + ' says hello!');
 	});
 	
+	socket.on('tempo', (msg) => {
+		//console.log(msg);
+		//io.in(msg.room).emit('tempo', msg.value);
+		socket.broadcast.to(msg.room).emit('tempo', msg.val);
+		
+	});
+
 	socket.on('synth', (msg) => {
+		console.log("this is the synth");
+		
 		console.log(msg);
 		//io.in(msg.room).emit('synth', msg.pattern);
+		
 		socket.broadcast.to(msg.room).emit('synth', msg.pattern);
+		
 	});
   
-	socket.on('drums', function(msg){
+	socket.on('drums', (msg) => {
+
+		console.log("this is the drums");
 		console.log(msg);
+		
 		//io.in(msg.room).emit('drums', msg.pattern);
+		
+		
 		socket.broadcast.to(msg.room).emit('drums', msg.pattern);
+		
 	});
 
-  	socket.on('tempo', function(msg){
-		console.log(msg);
-		//io.in(msg.room).emit('tempo', msg.value);
-		socket.broadcast.to(msg.room).emit('tempo', msg.value);
-
-	});
+  	
 });
 
 
