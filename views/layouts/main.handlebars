@@ -25,6 +25,9 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/">Home</a></li>
+          {{#if cur_user}}
+            <li id="colab"><a href="/colab">Colab</a></li>
+          {{/if}}
           <li><a href="/users">Users</a></li>
           {{#if cur_user}}
             <li id="logout"><a href="#">Logout</a></li>

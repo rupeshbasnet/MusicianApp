@@ -10,7 +10,7 @@ router.use('/profile', require('./profile'));
 router.use('/logout', require('./logout'));
 router.use('/beats', require('./beats'));
 router.use('/users', require('./users'));
-
+router.use('/colab', require('./colab'));
 
 router.get('/', (req, res) => {
   // res.render('homepage');
