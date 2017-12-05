@@ -18,11 +18,14 @@ router.get('/', (req, res) => {
   if(req.user) {
     req.user.getBeats()
     .then(myBeats => {
-      myBeats.forEach((beat) => {
+      myBeats
+      .sort((a, b) => { return a.dataValues.id - b.dataValues.id })
+      .forEach((beat) => {
         beats.push(beat.dataValues);
       });
     })
     .then(() => {
+      //console.log(beats);
       res.render('homepage', {cur_user: req.user, beats: beats});
     });
 

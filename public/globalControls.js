@@ -21,6 +21,13 @@ var number = new Nexus.Number('#tempodisplay')
 Tone.Transport.bpm.value = slider.value;
 number.link(slider);
 
+
+slider.on('change', function(v) {
+    console.log(v);
+    Tone.Transport.bpm.value = parseFloat(v);
+    //tempoEmit();
+});
+
 function loopDrum(time, col) {
     var column = drumSequencer.matrix.column(col);
     for (var i = 0; i < 4; i++) {
