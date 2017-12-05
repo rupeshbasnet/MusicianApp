@@ -1,10 +1,4 @@
 //send tempo over socket
-slider.on('change', function(v) {
-    //console.log(v);
-    Tone.Transport.bpm.value = parseFloat(v);
-    //tempoEmit();
-});
-
 function tempoEmit(){
   var val = slider.value;
   socket.emit('tempo', 
