@@ -1,8 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 panel panel-default" style="min-height: 200px;">
-      <h5>global controls</h5>
       <br>
+      <div class = "row">
+          <div class="col-lg-6"> 
+            <div class="input-group">
+              <input type="text" id="room" class="form-control" placeholder="Enter Colab Name..." aria-label="Enter Colab Name...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id = "join_room">Join/Create Colab</button>
+              </span>
+            </div>
+          </div>
+      </div>      
       <span id = "output"></span>
       <!-- <button id = "start_stop_btn" type = "button" class = "btn btn-success">Start/Stop</button> -->
       <br>
@@ -34,29 +43,8 @@
   <div class="row">
     <div class="col-lg-4 well" style="min-height: 261px;">
       drum controls
-      {{#if cur_user }}
-        <br>
-        <input id = "beatTitle" type = "text" name = "title" placeholder = "Title"/>
-        <input id = "beatDescription" type = "text" name = "description" placeholder = "Description"/>
-        <div id = "beatSelection">
-          <input id = "beat0" name = "beat" type = "radio" checked/>
-
-          <input id = "beat1" name = "beat" type = "radio" />
-
-          <input id = "beat2" name = "beat" type = "radio" />
-
-          <input id = "beat3" name = "beat" type = "radio" />
-
-          {{#each beats}}
-            <input id = "beatId{{@index}}" name = "beatId" type = "hidden" value = "{{this.id}}"/>
-          {{/each}}
-        </div>
-
-        <div id = "save"></div>
-
-      {{else}}
-
-      {{/if}}
+      This is the colab page!!!!!!!
+      
     </div>
     <div class="col-lg-8 panel panel-default">
       <h2>Drums</h2>
@@ -73,7 +61,6 @@
     </div>
   </div>
 
-
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
@@ -87,3 +74,6 @@
     </div>
   </div>
 </div>
+
+
+

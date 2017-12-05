@@ -7,7 +7,6 @@ router.get('/', (req, res) => {
   res.render('login', {
     status: req.flash('error')
   });
-
 });
 
 router.post('/', (req, res) => {

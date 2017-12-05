@@ -5,7 +5,7 @@ const router = express.Router();
 
 // This route retrieves a list of all users
 router.get('/', (req, res) => {
-  models.Users.findAll()
+  models.User.findAll()
     .then((allUsers) => {
       res.json(allUsers);
     })
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 
 // Create a new user
 router.post('/', (req, res) => {
-  models.Users.create({
+  models.User.create({
     UserName: req.body.username,
   })
   .then((users) => {
@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
 
 // Get a specific user
 router.get('/:id', (req, res) => {
-  models.Users.findById(parseInt(req.params.id), {
+  models.User.findById(parseInt(req.params.id), {
     include: [{
       model: models.Beats
     }]
@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/:id/beats', (req, res) => {
-  models.Users.findById(parseInt(req.params.id))
+  models.User.findById(parseInt(req.params.id))
     .then(users => {
       models.Beats.create({
         title: req.body.title,
@@ -54,3 +54,5 @@ router.post('/:id/beats', (req, res) => {
       res.sendStatus(400);
     });
 });
+
+module.exports = router;

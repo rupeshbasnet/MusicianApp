@@ -11,7 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "body-parser": "^1.18.2",
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "socket.io": "^2.0.4"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -25,7 +26,6 @@
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.13.3",
-    "socket.io": "^2.0.4",
     "tone": "^0.11.11"
   }
 }
