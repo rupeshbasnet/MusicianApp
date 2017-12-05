@@ -1,3 +1,4 @@
+// Global Loop
 var slider = new Nexus.Slider('#slider', {
     'size': [600, 20],
     'mode': 'relative', // 'relative' or 'absolute'
@@ -7,7 +8,6 @@ var slider = new Nexus.Slider('#slider', {
     'value': 120
 })
 
-// Global Loop
 var loop = new Tone.Sequence((time, col) => {
     //Loop Drum Sequencer
     loopDrum(time, col);
@@ -21,11 +21,34 @@ var number = new Nexus.Number('#tempodisplay')
 Tone.Transport.bpm.value = slider.value;
 number.link(slider);
 
+
 slider.on('change', function(v) {
     console.log(v);
     Tone.Transport.bpm.value = parseFloat(v);
     //tempoEmit();
 });
+
+function loopDrum(time, col) {
+    var column = drumSequencer.matrix.column(col);
+    for (var i = 0; i < 4; i++) {
+        if (column[i]) {
+            var vel = Math.random() * 0.5 + 0.5;
+            drums.get(notes[i]).start(time, 0, "16n", 0, vel);
+            drumSequencer.stepper.value = col;
+        }
+    }
+}
+
+function loopSynth(time, col) {
+    var column = synthSequencer.matrix.column(col);
+    for (var i = 0; i < 8; i++) {
+        if (column[i]) {
+            var vel = Math.random() * 0.5 + 0.5;
+            synth.triggerAttackRelease(synthNotes[i], '16n');
+            synthSequencer.stepper.value = col;
+        }
+    }
+}
 
 var textbutton = new Nexus.TextButton('#button', {
     'size': [150, 50],

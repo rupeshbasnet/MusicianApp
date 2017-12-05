@@ -6,6 +6,8 @@
   <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  
 </head>
 <body>
   <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -17,13 +19,20 @@
         </button>
         <a class="navbar-brand" href="/">Musician App</a>
         {{#if cur_user}}
-          <p class="navbar-text">Hello {{cur_user.firstName}} </p>
+          <div class="navbar-text">Hello </div><p class = "navbar-text" id = "username"> {{cur_user.firstName}} </i>
+          </p>
+          {{# if colab_page}}
+          
+          {{/if}}
         {{/if}}
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/">Home</a></li>
+          {{#if cur_user}}
+            <li id="colab"><a href="/colab">Colab</a></li>
+          {{/if}}
           <li><a href="/users">Users</a></li>
           {{#if cur_user}}
             <li id="logout"><a href="#">Logout</a></li>
@@ -39,7 +48,6 @@
   {{{ body }}}
 
   <script src="/vendor/nexus/NexusUI.js"></script>
-  <script src="/vendor/jquery/jquery.min.js"></script>
   <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
   <script src="/vendor/ToneJS/Tone.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
@@ -51,6 +59,18 @@
   <script type="text/javascript" src="/socketControls.js"></script>
 
   {{#if cur_user}}
+    {{#if colab_page}}
+    <script type="text/javascript">
+      // Declaring all variables before
+      
+      
+
+    </script>
+    <script type="text/javascript" src="/chat.js"></script>
+    <script type="text/javascript" src="/globalControlSocket.js"></script>
+    <script type="text/javascript" src="/socketDrums.js"></script>
+    <script type="text/javascript" src="/socketSynth.js"></script>
+    {{/if}}
   <script>
     ;(function() {
       $('#logout').click(function() {
