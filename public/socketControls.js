@@ -48,12 +48,23 @@ function drumsSetup(){
     if(e.buttons === 1)
       $(document).on('mouseup', function(){
         drumsEmit();
-        $(document).off();
+        $(document).off('mouseup');
       });
 
   });
 }
 
+function playEmit() {
+  socket.emit('play', playbutton.state);
+}
+
+function playSetup() {
+  socket.on('play', function( data ) {
+    playbutton.state = data;
+  });
+
+  $('#button').click(playEmit);
+}
 
 function tempoEmit(){
   socket.emit('tempo', slider.value);
@@ -67,10 +78,13 @@ function tempoSetup(){
     //console.log(data);
   });
 
-  // for Desktop, hacky
+  // Desktop
   $('svg')[0].addEventListener('mousedown', function(e){
     if(e.buttons === 1)
-      $('svg').mousemove(tempoEmit);
+      $(document).on('mouseup', function(){
+        tempoEmit();
+        $(document).off('mouseup');
+      });
   });
 
   // Mobile

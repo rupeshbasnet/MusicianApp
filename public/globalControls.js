@@ -50,7 +50,7 @@ function loopSynth(time, col) {
     }
 }
 
-var textbutton = new Nexus.TextButton('#button', {
+var playbutton = new Nexus.TextButton('#button', {
     'size': [150, 50],
     'state': false,
     'text': 'Play',
@@ -58,9 +58,9 @@ var textbutton = new Nexus.TextButton('#button', {
     'alternateText': 'Stop'
 })
 
-textbutton.on('change', function(v) {
+playbutton.on('change', function(v) {
     console.log(v);
-    textbutton.alternateText = 'Stop';
+    playbutton.alternateText = 'Stop';
     if (v) {
         loop.start();
     } else {
