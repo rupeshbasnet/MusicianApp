@@ -23,8 +23,16 @@
       <div id = "button"></div>
     </div>
     <div class="col-lg-4 well" style="min-height: 200px;">
-      chat area
-      <ul id = "list"></ul>
+      Chat area
+      <div class = "well" id = "chatbox" style = "overflow: auto; overflow-y: scroll; height: 80px;">
+        <ul id = "list" style= "list-style: none; padding: 0;" ></ul>
+      </div>
+      <div class="input-group">
+        <input type="text" id="chat_message" class="form-control" placeholder="Type your message..." aria-label="Type your message...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" id = "send_message">Send</button>
+          </span>
+      </div>
     </div>
   </div>
 

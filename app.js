@@ -55,15 +55,10 @@ io.on('connection', function(socket){
 	});
 
 	// Listen for the event and if there is an event broadcast it to everyone else.
-	socket.on('event', (e) => {
-		socket.broadcast.to(e.room).emit('event', e.name + ' says hello!');
+	socket.on('send.message', (e) => {
+		// We need to broadcast this to everyone including the client
+		io.in(e.room).emit('receive.message', e.name + ' : ' + e.message);
 	});
-
-	// Listen for the new user event 
-	socket.on('new user', (e) => {
-		console.log(e);
-		socket.broadcast.to(e.room).emit('event', e.name + ' joined the colaboration');
-	}); 
 	
 	socket.on('tempo', (msg) => {
 		// If we get tempo event we broadcast it to everyone in that room except the sender
