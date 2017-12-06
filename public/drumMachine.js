@@ -14,7 +14,7 @@ var drums = new Tone.Players({
     "Sistersnare": "/vendor/Samples/sistersnare.wav",
     "Kick": "/vendor/Samples/kick.wav"
 }, {
-    "volume": "10",
+    "volume": "2",
     "fadeOut": "64n",
 }).toMaster();
 

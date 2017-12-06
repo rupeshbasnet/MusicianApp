@@ -1,5 +1,18 @@
 /* ------------ Synth ------------ */
-var synth = new Tone.Synth().toMaster();
+
+
+var synth = new Tone.PolySynth(6, Tone.Synth, {
+			"oscillator" : {
+				"partials" : [8, 2, 8, 4],
+			}
+		},{
+        "volume": "10",
+    }).toMaster();
+
+
+// use this as part of volume fader
+// var vol = new Tone.Volume(0);
+// synth.chain(vol, Tone.Master);
 
 var synthSequencer = new Nexus.Sequencer('#synth', {
     'size': [704, 352],
