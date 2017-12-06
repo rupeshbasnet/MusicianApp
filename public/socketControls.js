@@ -92,9 +92,12 @@ function tempoSetup(){
 }
 
 function socketSetup(){
-  tempoSetup();
-  drumsSetup();
-  synthSetup();
+  if( document.getElementById('slider') )
+    tempoSetup();
+  if( document.getElementById('drums') )
+    drumsSetup();
+  if( document.getElementById('synth') )
+    synthSetup();
 }
 
 $( socketSetup );

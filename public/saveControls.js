@@ -123,6 +123,8 @@ function loadBeats() {
     beats[beatNo].beatArray = flatten();
   });
 
+  savebutton.on('click', saveBeats);
+
 }
 
 function newBeat(params) {
@@ -162,7 +164,7 @@ function updateBeat(id, params) {
   });
 }
 
-savebutton.on('click', function() {
+function saveBeats() {
 
   for(let i=0; i<4; i++)
   {
@@ -187,8 +189,7 @@ savebutton.on('click', function() {
     }
   }
 
-  //loadBeats();
-});
+}
 
 document.addEventListener("keypress", function(e){
   let key = e.key;

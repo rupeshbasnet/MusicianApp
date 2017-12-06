@@ -7,7 +7,7 @@
   <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
   <script src="/vendor/jquery/jquery.min.js"></script>
-  
+
 </head>
 <body>
   <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -22,7 +22,7 @@
           <div class="navbar-text">Hello </div><p class = "navbar-text" id = "username"> {{cur_user.firstName}} </i>
           </p>
           {{# if colab_page}}
-          
+
           {{/if}}
         {{/if}}
       </div>
@@ -53,17 +53,21 @@
   <script src="/socket.io/socket.io.js"></script>
 
   <script type="text/javascript" src="/globalControls.js"></script>
-  <script type="text/javascript" src="/saveControls.js"></script>
+
   <script type="text/javascript" src="/drumMachine.js"></script>
   <script type="text/javascript" src="/synth.js"></script>
   <script type="text/javascript" src="/socketControls.js"></script>
 
   {{#if cur_user}}
+    <script type="text/javascript" src="/saveControls.js"></script>
+  {{/if}}
+
+  {{#if cur_user}}
     {{#if colab_page}}
     <script type="text/javascript">
       // Declaring all variables before
-      
-      
+
+
 
     </script>
     <script type="text/javascript" src="/chat.js"></script>
