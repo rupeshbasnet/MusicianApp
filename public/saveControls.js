@@ -1,6 +1,6 @@
 var beats = [];
 
-var savebutton = !$('#save') || new Nexus.TextButton('#save', {
+var savebutton = new Nexus.TextButton('#save', {
   'size': [150, 50],
   'state': false,
   'text': 'Save',
@@ -39,19 +39,8 @@ function flatten() {
   return beatArray;
 }
 
-function getSelectedBeat() {
+function getBeatSelected() {
   return parseInt( document.querySelector('input[name=beat]:checked').id[4] );
-}
-
-function getBeat(id) {
-
-  $.get(
-    '/beats/' + id
-  )
-  .done(function(beat, statusText) {
-
-    return beat;
-  });
 }
 
 function setBeat(i) {
@@ -61,11 +50,9 @@ function setBeat(i) {
   drumSequencer.matrix.set.all(expand(beats[i].beatArray, 4));
 }
 
-function loadBeats() {
-  var inputs = document.querySelectorAll('input[name=beat]');
-  var beatIds = document.querySelectorAll('input[name=beatId]');
-
-
+function initBeats() {
+  let inputs = document.querySelectorAll('input[name=beat]');
+  let beatIds = document.querySelectorAll('input[name=beatId]');
 
   for(let i = 0; i < beatIds.length; i++)
   {
@@ -81,6 +68,9 @@ function loadBeats() {
         setBeat(i);
 
       });
+
+
+      if(i === 0) inputs[0].click();
     });
 
   }
@@ -112,22 +102,29 @@ function loadBeats() {
   //       drumSequencer.matrix.set.all(expand(Array(64).fill(0), 4));
   //     });
 
+}
+
+function loadBeats() {
+
+  initBeats();
+
   $('#beatTitle').on('change', function(e) {
-    var beatNo = getSelectedBeat();
+    var beatNo = getBeatSelected();
     beats[beatNo].title = e.target.value;
   });
 
   $('#beatDescription').on('change', function(e) {
-    var beatNo = getSelectedBeat();
+    var beatNo = getBeatSelected();
     beats[beatNo].description = e.target.value;
   });
 
   drumSequencer.on('change', function() {
-    var beatNo = getSelectedBeat();
+    var beatNo = getBeatSelected();
     beats[beatNo].beatArray = flatten();
   });
 
-  $("#beat0").click();
+  savebutton.on('click', saveBeats);
+
 }
 
 function newBeat(params) {
@@ -167,7 +164,7 @@ function updateBeat(id, params) {
   });
 }
 
-savebutton.on('click', function() {
+function saveBeats() {
 
   for(let i=0; i<4; i++)
   {
@@ -192,8 +189,7 @@ savebutton.on('click', function() {
     }
   }
 
-  //loadBeats();
-});
+}
 
 document.addEventListener("keypress", function(e){
   let key = e.key;
@@ -207,4 +203,18 @@ document.addEventListener("keypress", function(e){
 
 });
 
-$( loadBeats );
+// $(function(){
+//
+//   let promise = new Promise(loadBeats);
+//
+//   promise.then(
+//     console.log('then', beats)
+//   );
+//
+//   promise.then( beats.forEach((e, i) => console.log(e, i)) );
+//
+//   promise.then( document.getElementById('beat0').click() );
+//
+// });
+
+$(loadBeats);

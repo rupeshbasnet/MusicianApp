@@ -1,7 +1,7 @@
 //var socket = io();
 function synthEmit(){
 // Instead of previously just emitting the pattern. We now also emit the room name together.
-  socket.emit('synth', 
+  socket.emit('synth',
   { room: document.getElementById('room').value,
   	pattern: synthSequencer.matrix.pattern});
 }
@@ -14,11 +14,17 @@ for(let cell of $('#synth div').children())
 }
 
 // trigger even when mouse up is off the grid
-$(document).on('mouseup', synthEmit);
+$('#synth div').mouseleave(function(e){
+
+  if(e.buttons === 1)
+    $(document).on('mouseup', function(){
+      synthEmit();
+      $(document).off('mouseup');
+    });
+
+});
 
 socket.on('synth', function( data ) {
   synthSequencer.matrix.set.all(data);
   //console.log(data);
 });
-
-

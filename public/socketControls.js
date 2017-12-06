@@ -7,7 +7,6 @@ function synthEmit(){
 function synthSetup(){
   socket.on('synth', function( data ) {
     synthSequencer.matrix.set.all(data);
-    //console.log(data);
   });
 
   // trigger on every cell release
@@ -23,7 +22,7 @@ function synthSetup(){
     if(e.buttons === 1)
       $(document).on('mouseup', function(){
         synthEmit();
-        $(document).off();
+        $(document).off('mouseup');
       });
 
   });
@@ -49,28 +48,43 @@ function drumsSetup(){
     if(e.buttons === 1)
       $(document).on('mouseup', function(){
         drumsEmit();
-        $(document).off();
+        $(document).off('mouseup');
       });
 
   });
 }
 
+function playEmit() {
+  socket.emit('play', playbutton.state);
+}
+
+function playSetup() {
+  socket.on('play', function( data ) {
+    playbutton.state = data;
+  });
+
+  $('#button').click(playEmit);
+}
 
 function tempoEmit(){
   socket.emit('tempo', slider.value);
 }
 
 function tempoSetup(){
+
   //send tempo over socket
   socket.on('tempo', function( data ) {
     slider.value = parseInt(data);
     //console.log(data);
   });
 
-  // for Desktop, hacky
-  $('svg')[0].addEventListener('mousemove', function(e){
+  // Desktop
+  $('svg')[0].addEventListener('mousedown', function(e){
     if(e.buttons === 1)
-      $('svg').mousemove(tempoEmit);
+      $(document).on('mouseup', function(){
+        tempoEmit();
+        $(document).off('mouseup');
+      });
   });
 
   // Mobile
@@ -78,9 +92,12 @@ function tempoSetup(){
 }
 
 function socketSetup(){
-  tempoSetup();
-  drumsSetup();
-  synthSetup();
+  if( document.getElementById('slider') )
+    tempoSetup();
+  if( document.getElementById('drums') )
+    drumsSetup();
+  if( document.getElementById('synth') )
+    synthSetup();
 }
 
 $( socketSetup );

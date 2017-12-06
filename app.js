@@ -62,7 +62,7 @@ io.on('connection', function(socket){
 		// We need to broadcast this to everyone including the client
 		io.in(e.room).emit('receive.message', e.name + ' : ' + e.message);
 	});
-	
+
 	socket.on('tempo', (msg) => {
 		// If we get tempo event we broadcast it to everyone in that room except the sender
 		socket.broadcast.to(msg.room).emit('tempo', msg.val);
@@ -72,7 +72,7 @@ io.on('connection', function(socket){
 		// If we get synth event we broadcast it to everyone in that room except the sender
 		socket.broadcast.to(msg.room).emit('synth', msg.pattern);
 	});
-  
+
 	socket.on('drums', (msg) => {
 		// If we get drums event we broadcast it to everyone in that room except the sender
 		socket.broadcast.to(msg.room).emit('drums', msg.pattern);
@@ -80,6 +80,20 @@ io.on('connection', function(socket){
 
 });
 
+io.on('connection', function(socket){
+  socket.on('tempo', function(msg){
+		//console.log(msg);
+		io.emit('tempo', msg);
+	});
+	socket.on('synth', function(msg){
+		//console.log(msg);
+		io.emit('synth', msg);
+	});
+  socket.on('drums', function(msg){
+		//console.log(msg);
+		io.emit('drums', msg);
+	});
+});
 
 // First, make sure the Database tables and models are in sync
 // then, start up the server and start listening.
@@ -89,5 +103,3 @@ io.on('connection', function(socket){
 
 		});
    });
-
-
