@@ -35,28 +35,29 @@ app.use(controllers)
 io.on('connection', function(socket){
 	// List for the room.join event and from there join a room
 	// We will get the room name "room" passed in from the client
-	socket.on('room.join', (room) => {
+	socket.on('room.join', (msg) => {
 		// Log all the rooms
-		console.log(socket.rooms);
+		//console.log(socket.rooms);
 		// Socket will have the keys of everyroom that it is in
 		// Filter out the rooms that are not the socket
 		Object.keys(socket.rooms).filter((r) => r != socket.id)
 		.forEach((r) => socket.leave(r));  // Leave that room since we want the user to be in only one room
 
-		// settimeout to 0 so that it gets in the next evvent loop
+		// settimeout to 0 so that it gets in the next event loop
 		setTimeout(() => {
 			// Take the "room" and join it
-			socket.join(room);
+			socket.join(msg.room);
 			// Emit a socket saying we joined the room
-			socket.emit('event', 'Joined room' + room);
+			socket.emit('event', 'Joined Colaboration ' + msg.room);
 			// We will broadcast to the room - broadcast will send it to everyone but yourself
-			socket.broadcast.to(room).emit('event', 'Someone joined room ' + room);
+			socket.broadcast.to(msg.room).emit('event', msg.name + ' joined ' + msg.room);
 		}, 0);
 	});
 
 	// Listen for the event and if there is an event broadcast it to everyone else.
-	socket.on('event', (e) => {
-		socket.broadcast.to(e.room).emit('event', e.name + ' says hello!');
+	socket.on('send.message', (e) => {
+		// We need to broadcast this to everyone including the client
+		io.in(e.room).emit('receive.message', e.name + ' : ' + e.message);
 	});
 	
 	socket.on('tempo', (msg) => {
