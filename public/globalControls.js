@@ -1,4 +1,6 @@
 // Global Loop
+Nexus.context = Tone.context
+
 var slider = new Nexus.Slider('#slider', {
     'size': [600, 20],
     'mode': 'relative', // 'relative' or 'absolute'
@@ -9,10 +11,18 @@ var slider = new Nexus.Slider('#slider', {
 })
 
 var loop = new Tone.Sequence((time, col) => {
+
     //Loop Drum Sequencer
     loopDrum(time, col);
     //Loop Synth Sequencer
     loopSynth(time, col);
+    Tone.Draw.schedule(function(){
+        //the callback synced to the animation frame at the given time
+        $("#S"+col).css("opacity", 1).animate({"opacity" : 0}, 300)
+        $("#D"+col).css("opacity", 1).animate({"opacity" : 0}, 300)
+
+    }, time);
+
 }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "16n");
 
 Tone.Transport.start();
@@ -27,6 +37,12 @@ slider.on('change', function(v) {
     Tone.Transport.bpm.value = parseFloat(v);
     //tempoEmit();
 });
+
+var oscilloscope = new Nexus.Oscilloscope('#oscilloscope',{
+  'size': [350,200]
+})
+
+
 
 function loopDrum(time, col) {
     var column = drumSequencer.matrix.column(col);
@@ -63,7 +79,11 @@ playbutton.on('change', function(v) {
     playbutton.alternateText = 'Stop';
     if (v) {
         loop.start();
+        oscilloscope.connect( Tone.Master );
     } else {
         loop.stop();
+        oscilloscope.disconnect( Tone.Master );
     }
 });
+
+
