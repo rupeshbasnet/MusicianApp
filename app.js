@@ -58,7 +58,7 @@ io.on('connection', function(socket){
 	socket.on('event', (e) => {
 		socket.broadcast.to(e.room).emit('event', e.name + ' says hello!');
 	});
-	
+
 	socket.on('tempo', (msg) => {
 		// If we get tempo event we broadcast it to everyone in that room except the sender
 		socket.broadcast.to(msg.room).emit('tempo', msg.val);
@@ -68,13 +68,15 @@ io.on('connection', function(socket){
 		// If we get synth event we broadcast it to everyone in that room except the sender
 		socket.broadcast.to(msg.room).emit('synth', msg.pattern);
 	});
-  
+
 	socket.on('drums', (msg) => {
 		// If we get drums event we broadcast it to everyone in that room except the sender
 		socket.broadcast.to(msg.room).emit('drums', msg.pattern);
 	});
 
 });
+
+io.on('connection', function(socket){ });
 
 
 // First, make sure the Database tables and models are in sync
@@ -85,5 +87,3 @@ io.on('connection', function(socket){
 
 		});
    });
-
-

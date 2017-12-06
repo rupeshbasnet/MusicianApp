@@ -7,7 +7,6 @@ function synthEmit(){
 function synthSetup(){
   socket.on('synth', function( data ) {
     synthSequencer.matrix.set.all(data);
-    //console.log(data);
   });
 
   // trigger on every cell release
@@ -23,7 +22,7 @@ function synthSetup(){
     if(e.buttons === 1)
       $(document).on('mouseup', function(){
         synthEmit();
-        $(document).off();
+        $(document).off('mouseup');
       });
 
   });
@@ -61,6 +60,7 @@ function tempoEmit(){
 }
 
 function tempoSetup(){
+
   //send tempo over socket
   socket.on('tempo', function( data ) {
     slider.value = parseInt(data);
@@ -68,7 +68,7 @@ function tempoSetup(){
   });
 
   // for Desktop, hacky
-  $('svg')[0].addEventListener('mousemove', function(e){
+  $('svg')[0].addEventListener('mousedown', function(e){
     if(e.buttons === 1)
       $('svg').mousemove(tempoEmit);
   });
