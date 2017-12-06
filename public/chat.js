@@ -4,10 +4,10 @@
 // When user clicks join room emit a socket of event "room.join" with room and username
 document.getElementById('join_room').addEventListener('click', (e) => {
 	var userName = document.getElementById('username').innerHTML;
-	//console.log(userName);
 	socket.emit('room.join', 
 	{	room: document.getElementById('room').value,
-		name: userName});
+		name: userName,
+	});
 });
 
 // When a user sends the message emit send.message

@@ -36,13 +36,10 @@ io.on('connection', function(socket){
 	// List for the room.join event and from there join a room
 	// We will get the room name "room" passed in from the client
 	socket.on('room.join', (msg) => {
-		// Log all the rooms
-		//console.log(socket.rooms);
 		// Socket will have the keys of everyroom that it is in
 		// Filter out the rooms that are not the socket
 		Object.keys(socket.rooms).filter((r) => r != socket.id)
 		.forEach((r) => socket.leave(r));  // Leave that room since we want the user to be in only one room
-
 		// settimeout to 0 so that it gets in the next event loop
 		setTimeout(() => {
 			// Take the "room" and join it
@@ -53,6 +50,12 @@ io.on('connection', function(socket){
 			socket.broadcast.to(msg.room).emit('event', msg.name + ' joined ' + msg.room);
 		}, 0);
 	});
+
+	// On user mouse activity
+	socket.on('mouse.activity', (e) => {
+		socket.broadcast.to(e.room).emit('all.mouse.activity', {session_id: socket.id,
+																coords: e});
+	})
 
 	// Listen for the event and if there is an event broadcast it to everyone else.
 	socket.on('send.message', (e) => {
