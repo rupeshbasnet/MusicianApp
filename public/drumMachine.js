@@ -1,4 +1,4 @@
-Nexus.context = Tone.context
+
 output = [];
 
 var drumSequencer = new Nexus.Sequencer('#drums', {
