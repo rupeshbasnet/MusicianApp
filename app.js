@@ -80,20 +80,20 @@ io.on('connection', function(socket){
 
 });
 
-io.on('connection', function(socket){
-  socket.on('tempo', function(msg){
-		//console.log(msg);
-		io.emit('tempo', msg);
-	});
-	socket.on('synth', function(msg){
-		//console.log(msg);
-		io.emit('synth', msg);
-	});
-  socket.on('drums', function(msg){
-		//console.log(msg);
-		io.emit('drums', msg);
-	});
-});
+// io.on('connection', function(socket){
+//   socket.on('tempo', function(msg){
+// 		//console.log(msg);
+// 		io.emit('tempo', msg);
+// 	});
+// 	socket.on('synth', function(msg){
+// 		//console.log(msg);
+// 		io.emit('synth', msg);
+// 	});
+//   socket.on('drums', function(msg){
+// 		//console.log(msg);
+// 		io.emit('drums', msg);
+// 	});
+// });
 
 // First, make sure the Database tables and models are in sync
 // then, start up the server and start listening.
