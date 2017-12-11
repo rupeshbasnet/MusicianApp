@@ -2,7 +2,7 @@
 Nexus.context = Tone.context
 
 var slider = new Nexus.Slider('#slider', {
-    'size': [600, 20],
+    'size': [350, 20],
     'mode': 'relative', // 'relative' or 'absolute'
     'min': 60,
     'max': 200,
@@ -39,7 +39,7 @@ slider.on('change', function(v) {
 });
 
 var oscilloscope = new Nexus.Oscilloscope('#oscilloscope',{
-  'size': [350,200]
+  'size': [350,140]
 })
 
 
@@ -85,5 +85,3 @@ playbutton.on('change', function(v) {
         oscilloscope.disconnect( Tone.Master );
     }
 });
-
-
