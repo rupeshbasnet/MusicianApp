@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-8 panel panel-default" style="min-height: 200px;">
+    <div class="col-lg-4 panel panel-default" style="min-height: 200px;">
       <br>
       <div class = "row">
-          <div class="col-lg-6">
+          <div class="col-lg-12">
             <div class="input-group">
               <input type="text" id="room" class="form-control" placeholder="Enter Colab Name..." aria-label="Enter Colab Name...">
               <span class="input-group-btn">
@@ -22,8 +22,12 @@
       <br>
       <div id = "button"></div>
     </div>
+    <div class="col-lg-4 panel panel-default" style="min-height: 200px;">
+      <h5>visualizer</h5>
+      <div id="oscilloscope"></div>
+    </div>
     <div class="col-lg-4 well" style="min-height: 200px;">
-      Chat area
+      <h5>chat area</h5>
       <div class = "well" id = "chatbox" style = "overflow: auto; overflow-y: scroll; height: 80px;">
         <ul id = "list" style= "list-style: none; padding: 0;" ></ul>
       </div>
@@ -43,7 +47,8 @@
       <div id="synth-vol"></div>
       <div> echo mix </div>
       <div id="echo"></div>
-      <div id="oscilloscope"></div>
+      <div> filter </div>
+      <div id="synth-filter"></div>
     </div>
     <div class="col-lg-8 panel panel-default">
       <h2>Synth</h2>
