@@ -1,18 +1,24 @@
 /* ------------ Synth ------------ */
 var volSlider = new Nexus.Slider("#synth-vol");
 var delay = new Nexus.Slider("#echo");
+var filterSlider = new Nexus.Slider("#synth-filter");
 
 var synth = new Tone.PolySynth(6, Tone.Synth, {
 			"oscillator" : {
-				"partials" : [8, 2, 8, 4],
+				// "partials" : [8, 2, 8, 4],
+				"type" : "sawtooth",
 			   }
 		  });
 
-var volume = new Tone.Volume(10);
+var volume = new Tone.Volume(0);
 var delayGen = new Tone.FeedbackDelay(0.5,0.2);
 delayGen.wet.value = 0;
 
-synth.chain( delayGen, volume, Tone.Master );
+var filter = new Tone.Filter(2000, "lowpass", -24);
+
+
+synth.chain( delayGen, filter, volume, Tone.Master );
+
 
 delay.min = 0;
 delay.max = 0.7;
@@ -23,13 +29,40 @@ delay.on('change',function(value) {
 })
 
 
-volSlider.min = 0;
-volSlider.max = 15;
-volSlider.value = 10;
+filterSlider.min = 50;
+filterSlider.max = 10000;
+filterSlider.value = 2000;
+
+filterSlider.on('change',function(value) {
+	filter.frequency.value = value;
+})
+
+
+volSlider.min = -10;
+volSlider.max = 10;
+volSlider.value = 0;
 
 volSlider.on('change',function(vol) {
-	volume.volume.rampTo(vol);
+	volume.volume.value = vol;
 })
+
+var oscbutton = new Nexus.TextButton('#osc-button', {
+    'size': [50, 50],
+    'state': false,
+    'text': 'SAW',
+    'alternate': false,
+    'alternateText': 'SQR'
+})
+
+oscbutton.on('change', function(v) {
+    console.log(v);
+    oscbutton.alternateText = 'SQR';
+    if (v) {
+			synth.set("oscillator", {"type": "square"});
+    } else {
+			synth.set("oscillator", {"type": "sawtooth"});
+    }
+});
 
 var synthSequencer = new Nexus.Sequencer('#synth', {
     'size': [704, 352],
