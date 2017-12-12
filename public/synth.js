@@ -10,7 +10,7 @@ var synth = new Tone.PolySynth(6, Tone.Synth, {
 			   }
 		  });
 
-var volume = new Tone.Volume(10);
+var volume = new Tone.Volume(0);
 var delayGen = new Tone.FeedbackDelay(0.5,0.2);
 delayGen.wet.value = 0;
 
@@ -38,15 +38,15 @@ filterSlider.on('change',function(value) {
 })
 
 
-volSlider.min = 0;
-volSlider.max = 15;
-volSlider.value = 10;
+volSlider.min = -10;
+volSlider.max = 10;
+volSlider.value = 0;
 
 volSlider.on('change',function(vol) {
-	volume.volume.rampTo(vol);
+	volume.volume.value = vol;
 })
 
-var fatbutton = new Nexus.TextButton('#fat-button', {
+var oscbutton = new Nexus.TextButton('#osc-button', {
     'size': [50, 50],
     'state': false,
     'text': 'SAW',
@@ -54,9 +54,9 @@ var fatbutton = new Nexus.TextButton('#fat-button', {
     'alternateText': 'SQR'
 })
 
-fatbutton.on('change', function(v) {
+oscbutton.on('change', function(v) {
     console.log(v);
-    fatbutton.alternateText = 'SQR';
+    oscbutton.alternateText = 'SQR';
     if (v) {
 			synth.set("oscillator", {"type": "square"});
     } else {
