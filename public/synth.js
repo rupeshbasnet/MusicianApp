@@ -5,7 +5,8 @@ var filterSlider = new Nexus.Slider("#synth-filter");
 
 var synth = new Tone.PolySynth(6, Tone.Synth, {
 			"oscillator" : {
-				"partials" : [8, 2, 8, 4],
+				// "partials" : [8, 2, 8, 4],
+				"type" : "sawtooth",
 			   }
 		  });
 
@@ -13,7 +14,7 @@ var volume = new Tone.Volume(10);
 var delayGen = new Tone.FeedbackDelay(0.5,0.2);
 delayGen.wet.value = 0;
 
-var filter = new Tone.Filter(10000, "lowpass", -24);
+var filter = new Tone.Filter(2000, "lowpass", -24);
 
 
 synth.chain( delayGen, filter, volume, Tone.Master );
@@ -30,7 +31,7 @@ delay.on('change',function(value) {
 
 filterSlider.min = 50;
 filterSlider.max = 10000;
-filterSlider.value = 5000;
+filterSlider.value = 2000;
 
 filterSlider.on('change',function(value) {
 	filter.frequency.value = value;
@@ -44,6 +45,24 @@ volSlider.value = 10;
 volSlider.on('change',function(vol) {
 	volume.volume.rampTo(vol);
 })
+
+var fatbutton = new Nexus.TextButton('#fat-button', {
+    'size': [50, 50],
+    'state': false,
+    'text': 'SAW',
+    'alternate': false,
+    'alternateText': 'SQR'
+})
+
+fatbutton.on('change', function(v) {
+    console.log(v);
+    fatbutton.alternateText = 'SQR';
+    if (v) {
+			synth.set("oscillator", {"type": "square"});
+    } else {
+			synth.set("oscillator", {"type": "sawtooth"});
+    }
+});
 
 var synthSequencer = new Nexus.Sequencer('#synth', {
     'size': [704, 352],
