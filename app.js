@@ -68,6 +68,11 @@ io.on('connection', function(socket){
 		socket.broadcast.to(msg.room).emit('tempo', msg.val);
 	});
 
+  socket.on('play', (msg) => {
+		// If we get tempo event we broadcast it to everyone in that room except the sender
+		socket.broadcast.to(msg.room).emit('play', msg.state);
+	});
+
 	socket.on('synth', (msg) => {
 		// If we get synth event we broadcast it to everyone in that room except the sender
 		socket.broadcast.to(msg.room).emit('synth', msg.pattern);
