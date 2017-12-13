@@ -27,3 +27,42 @@
 
   background-color: black; !important
 }
+
+#record {
+  display: inline-block;
+}
+
+#button {
+  display: inline-block;
+}
+
+#synth {
+  display: inline-block;
+}
+
+#synthIds {
+  height: 350px;
+  display: inline-block;
+}
+
+#synthId {
+  height: 13.4%;
+}
+
+#drums {
+  display: inline-block;
+}
+
+#drumIds {
+  height: 176px;
+  display: inline-block;
+}
+
+#drumId {
+  height: 30%;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}

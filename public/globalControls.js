@@ -76,6 +76,25 @@ var playbutton = new Nexus.TextButton('#button', {
     'alternateText': 'Stop'
 })
 
+var recordbutton = new Nexus.TextButton('#record', {
+    'size': [150, 50],
+    'state': false,
+    'text': 'Record',
+    'alternate': false,
+    'alternateText': 'Stop'
+})
+
+recordbutton.on('change', function(v) {
+    recordbutton.alternateText = 'Stop';
+    if (v) {
+        startRecording();
+    } else {
+        stopRecording();
+    }
+})
+
+
+
 playbutton.on('change', function(v) {
     console.log(v);
     playbutton.alternateText = 'Stop';

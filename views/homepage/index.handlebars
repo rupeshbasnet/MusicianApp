@@ -2,16 +2,17 @@
   <div class="row">
     <div class="col-lg-4 panel panel-primary" style="min-height: 200px;">
       <h5>Global controls</h5>
-      <br>
       <span id = "output"></span>
       <!-- <button id = "start_stop_btn" type = "button" class = "btn btn-success">Start/Stop</button> -->
-      <br>
+      
       <div id = "slider">
         <div id = "tempodisplay"></div>
       </div>
       <br>
       <br>
       <div id = "button"></div>
+      <div id = "record"></div>
+      <ul id="recordingslist"></ul>
     </div>
     <div class="col-lg-4 panel panel-primary drum-panel" style="min-height: 200px;">
       <h5>Visualizer</h5>
@@ -55,6 +56,16 @@
         <div id="S15" class="step"></div>
       </div>
       <div id = "synth"></div>
+      <div id = "synthIds">
+        <div id = "synthId">C4</div>
+        <div id = "synthId">B3</div>
+        <div id = "synthId">A3</div>
+        <div id = "synthId">G3</div>
+        <div id = "synthId">F3</div>
+        <div id = "synthId">E3</div>
+        <div id = "synthId">D3</div>
+        <div id = "synthId">C3</div>
+      </div>
       <strong style="color: white;margin-left:14px; word-spacing:24.5px; ">01</strong>
       <span style="margin-left:24.5px; word-spacing:24.5px;">02 03 04</span>
       <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">05</strong>
@@ -121,6 +132,12 @@
         <div id="D15" class="step"></div>
       </div>
       <div id = "drums"></div>
+      <div id = "drumIds">
+        <div id = "drumId">Hihat</div>
+        <div id = "drumId">Hat</div>
+        <div id = "drumId">Snare</div>
+        <div id = "drumId">Kick</div>
+      </div>
       <strong style="color: white;margin-left:14px; word-spacing:24.5px; ">01</strong>
       <span style="margin-left:24.5px; word-spacing:24.5px;">02 03 04</span>
       <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">05</strong>
