@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = (models) => {
     models.User.hasMany(models.Beats);
+    models.User.hasMany(models.Patterns);
   }
 
   User.beforeCreate((user) =>

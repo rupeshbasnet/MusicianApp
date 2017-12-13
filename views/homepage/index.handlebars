@@ -17,7 +17,6 @@
       <h5>Visualizer</h5>
       <div id="oscilloscope"></div>
     </div>
-
   </div>
 
   <div class="row">
@@ -28,9 +27,9 @@
       <div> echo mix </div>
       <div id="echo"></div>
       <br>
-      <input id = "synth_pattern_title" type = "text" name = "title" placeholder = "Title"/>
+      <input id = "synth_pattern_title" style="background-color: #222" type = "text" name = "title" placeholder = "Title"/>
       <input id = "synth_pattern_description" type = "text" name = "description" placeholder = "Description"/>
-      <div id = "patternSelection">
+      <div id = "synth_patternSelection">
         <input id = "synth_pattern0" name = "synth_pattern" type = "radio" checked/>
 
         <input id = "synth_pattern1" name = "synth_pattern" type = "radio" />
@@ -41,7 +40,7 @@
       </div>
 
       {{#if cur_user}}
-        {{#each patterns}}
+        {{#each synth_patterns}}
           <input id = "synth_patternId{{@index}}" name = "synth_patternId" type = "hidden" value = "{{this.id}}"/>
         {{/each}}
           <div id = "synth_save"></div>
@@ -94,66 +93,66 @@
       drum controls
       <br>
 
-    <div class="col-lg-4 panel panel-primary" style="min-height: 290px;">
-      <h5>Drum controls</h5>
-      <div> volume </div>
-      <div id="drum-vol"></div>
-      <div> echo mix </div>
-      <div id="echo-drums"></div>
-      <div> filter </div>
-      <div id="drums-filter"></div>
+      <div class="col-lg-4 panel panel-primary" style="min-height: 290px;">
+        <h5>Drum controls</h5>
+        <div> volume </div>
+        <div id="drum-vol"></div>
+        <div> echo mix </div>
+        <div id="echo-drums"></div>
+        <div> filter </div>
+        <div id="drums-filter"></div>
 
-      {{#if cur_user }}
+          <br>
+          <input id = "beat_title" type = "text" name = "title" placeholder = "Title"/>
+          <input id = "beat_description" type = "text" name = "description" placeholder = "Description"/>
+          <div id = "beatSelection">
+            <input id = "beat0" name = "beat" type = "radio" checked/>
+
+          <input id = "beat1" name = "beat" type = "radio" />
+
+          <input id = "beat2" name = "beat" type = "radio" />
+
+          <input id = "beat3" name = "beat" type = "radio" />
+          </div>
+
+          {{#if cur_user }}
+            {{#each beats}}
+              <input id = "beatId{{@index}}" name = "beatId" type = "hidden" value = "{{this.id}}"/>
+            {{/each}}
+              <div id = "drums_save"></div>
+          {{/if}}
+
+      </div>
+      <div class="col-lg-8 panel panel-primary drum-panel" style="min-height: 290px;">
+        <div id = "steppers">
+          <div id="DO" class="step"></div>
+          <div id="D1" class="step"></div>
+          <div id="D2" class="step"></div>
+          <div id="D3" class="step"></div>
+          <div id="D4" class="step"></div>
+          <div id="D5" class="step"></div>
+          <div id="D6" class="step"></div>
+          <div id="D7" class="step"></div>
+          <div id="D8" class="step"></div>
+          <div id="D9" class="step"></div>
+          <div id="D10" class="step"></div>
+          <div id="D11" class="step"></div>
+          <div id="D12" class="step"></div>
+          <div id="D13" class="step"></div>
+          <div id="D14" class="step"></div>
+          <div id="D15" class="step"></div>
+        </div>
+        <div id = "drums"></div>
+        <strong style="color: white;margin-left:14px; word-spacing:24.5px; ">01</strong>
+        <span style="margin-left:24.5px; word-spacing:24.5px;">02 03 04</span>
+        <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">05</strong>
+        <span style="margin-left:24.5px; word-spacing:24.5px;">06 07 08</span>
+        <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">09</strong>
+        <span style="margin-left:24.5px; word-spacing:24.5px;">10 11 12</span>
+        <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">13</strong>
+        <span style="margin-left:24.5px; word-spacing:24.5px;">14 15 16</span>
         <br>
-        <input id = "beat_title" type = "text" name = "title" placeholder = "Title"/>
-        <input id = "beat_description" type = "text" name = "description" placeholder = "Description"/>
-        <div id = "beatSelection">
-          <input id = "beat0" name = "beat" type = "radio" checked/>
-
-        <input id = "beat1" name = "beat" type = "radio" />
-
-        <input id = "beat2" name = "beat" type = "radio" />
-
-        <input id = "beat3" name = "beat" type = "radio" />
       </div>
-
-        {{#if cur_user }}
-          {{#each beats}}
-            <input id = "beatId{{@index}}" name = "beatId" type = "hidden" value = "{{this.id}}"/>
-          {{/each}}
-            <div id = "drums_save"></div>
-        {{/if}}
-
-    </div>
-    <div class="col-lg-8 panel panel-primary drum-panel" style="min-height: 290px;">
-      <div id = "steppers">
-        <div id="DO" class="step"></div>
-        <div id="D1" class="step"></div>
-        <div id="D2" class="step"></div>
-        <div id="D3" class="step"></div>
-        <div id="D4" class="step"></div>
-        <div id="D5" class="step"></div>
-        <div id="D6" class="step"></div>
-        <div id="D7" class="step"></div>
-        <div id="D8" class="step"></div>
-        <div id="D9" class="step"></div>
-        <div id="D10" class="step"></div>
-        <div id="D11" class="step"></div>
-        <div id="D12" class="step"></div>
-        <div id="D13" class="step"></div>
-        <div id="D14" class="step"></div>
-        <div id="D15" class="step"></div>
-      </div>
-      <div id = "drums"></div>
-      <strong style="color: white;margin-left:14px; word-spacing:24.5px; ">01</strong>
-      <span style="margin-left:24.5px; word-spacing:24.5px;">02 03 04</span>
-      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">05</strong>
-      <span style="margin-left:24.5px; word-spacing:24.5px;">06 07 08</span>
-      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">09</strong>
-      <span style="margin-left:24.5px; word-spacing:24.5px;">10 11 12</span>
-      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">13</strong>
-      <span style="margin-left:24.5px; word-spacing:24.5px;">14 15 16</span>
-      <br>
     </div>
   </div>
 </div>

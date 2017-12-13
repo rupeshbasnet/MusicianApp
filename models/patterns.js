@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
   const Patterns = sequelize.define('Patterns', {
     title: {
         type: DataTypes.STRING,
-        unique: 'compositeIndex',
         allowNull: false,
         validate: {
         notEmpty: true,

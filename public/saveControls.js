@@ -37,7 +37,7 @@ function createPattern(params, pattern_type) {
       patternArray[noBeats] = ptrn;
     }
 
-    var container = document.querySelector('input[name='+ pattern_type + 'Id]').parentNode;
+    var container = document.getElementById(pattern_type + 'Selection').parentNode;
     var save_btn = container.lastElementChild;
 
     var patternInput = document.createElement('input');
@@ -54,6 +54,7 @@ function createPattern(params, pattern_type) {
 function updatePattern(params, pattern_type, id) {
 
   const route = '/' + pattern_type + 's/' + id;
+  console.log(route);
 
   $.ajax({
     url: route,
@@ -72,6 +73,8 @@ function saveBeats(patterns_type) {
 
   for(let i=0; i<PATTERN_LIMIT; i++)
   {
+
+    console.log(patternArray[i]);
 
     var title = patternArray[i].title;
     var description = patternArray[i].description;
