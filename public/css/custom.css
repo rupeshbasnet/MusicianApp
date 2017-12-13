@@ -28,6 +28,7 @@
   background-color: black; !important
 }
 
+
 input[type="text"] {
   background-color: #222;
   color: #ddd;
@@ -47,4 +48,43 @@ input[type="text"]:-ms-input-placeholder { /* IE 10+ */
 
 input[type="text"]:-moz-placeholder { /* Firefox 18- */
   color: #ddd;
+}
+
+#record {
+  display: inline-block;
+}
+
+#button {
+  display: inline-block;
+}
+
+#synth {
+  display: inline-block;
+}
+
+#synthIds {
+  height: 350px;
+  display: inline-block;
+}
+
+#synthId {
+  height: 13.4%;
+}
+
+#drums {
+  display: inline-block;
+}
+
+#drumIds {
+  height: 176px;
+  display: inline-block;
+}
+
+#drumId {
+  height: 30%;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
 }
