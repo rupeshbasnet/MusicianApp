@@ -13,7 +13,7 @@
       <br>
       <div id = "button"></div>
     </div>
-    <div class="col-lg-4" style="min-height: 200px;">
+    <div class="col-lg-4 panel panel-primary drum-panel" style="min-height: 200px;">
       <h5>Visualizer</h5>
       <div id="oscilloscope"></div>
     </div>
@@ -29,10 +29,13 @@
       <div id="echo"></div>
       <div> filter </div>
       <div id="synth-filter"></div>
+      <div> phaser </div>
+      <div id="phaser-Slider"></div>
+
       <div> oscillator type </div>
       <div id="osc-button"></div>
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-8 panel panel-primary drum-panel" style="min-height: 437px;">
       <div id = "steppers">
         <div id="SO" class="step"></div>
         <div id="S1" class="step"></div>
@@ -52,14 +55,28 @@
         <div id="S15" class="step"></div>
       </div>
       <div id = "synth"></div>
-      <span style="margin-left:14px; word-spacing:24.5px;">01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16</span>
+      <strong style="color: white;margin-left:14px; word-spacing:24.5px; ">01</strong>
+      <span style="margin-left:24.5px; word-spacing:24.5px;">02 03 04</span>
+      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">05</strong>
+      <span style="margin-left:24.5px; word-spacing:24.5px;">06 07 08</span>
+      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">09</strong>
+      <span style="margin-left:24.5px; word-spacing:24.5px;">10 11 12</span>
+      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">13</strong>
+      <span style="margin-left:24.5px; word-spacing:24.5px;">14 15 16</span>
       <br>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-lg-4 panel panel-primary" style="min-height: 261px;">
+    <div class="col-lg-4 panel panel-primary" style="min-height: 290px;">
       <h5>Drum controls</h5>
+      <div> volume </div>
+      <div id="drum-vol"></div>
+      <div> echo mix </div>
+      <div id="echo-drums"></div>
+      <div> filter </div>
+      <div id="drums-filter"></div>
+      
       {{#if cur_user }}
         <br>
         <input id = "beatTitle" type = "text" name = "title" placeholder = "Title"/>
@@ -84,7 +101,7 @@
 
       {{/if}}
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-8 panel panel-primary drum-panel" style="min-height: 290px;">
       <div id = "steppers">
         <div id="DO" class="step"></div>
         <div id="D1" class="step"></div>
@@ -104,29 +121,15 @@
         <div id="D15" class="step"></div>
       </div>
       <div id = "drums"></div>
-      <strong style="margin-left:14px; word-spacing:24.5px; ">01</strong>
+      <strong style="color: white;margin-left:14px; word-spacing:24.5px; ">01</strong>
       <span style="margin-left:24.5px; word-spacing:24.5px;">02 03 04</span>
-      <strong style="margin-left:24.5px; word-spacing:24.5px; ">05</strong>
+      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">05</strong>
       <span style="margin-left:24.5px; word-spacing:24.5px;">06 07 08</span>
-      <strong style="margin-left:24.5px; word-spacing:24.5px; ">09</strong>
+      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">09</strong>
       <span style="margin-left:24.5px; word-spacing:24.5px;">10 11 12</span>
-      <strong style="margin-left:24.5px; word-spacing:24.5px; ">13</strong>
+      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">13</strong>
       <span style="margin-left:24.5px; word-spacing:24.5px;">14 15 16</span>
       <br>
-    </div>
-  </div>
-
-
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-      <br>
-
-      <br>
-
-
-      <br>
-
     </div>
   </div>
 </div>

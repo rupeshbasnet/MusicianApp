@@ -44,7 +44,7 @@ var oscilloscope = new Nexus.Oscilloscope('#oscilloscope',{
   'size': [350,140]
 })
 
-
+oscilloscope.colorize("fill", "black");
 
 function loopDrum(time, col) {
     var column = drumSequencer.matrix.column(col);
@@ -82,8 +82,11 @@ playbutton.on('change', function(v) {
     if (v) {
         loop.start();
         oscilloscope.connect( Tone.Master );
+        spectrogram.connect( Tone.Master );
     } else {
         loop.stop();
         oscilloscope.disconnect( Tone.Master );
+        spectrogram.disconnect ( Tone.Master );
+
     }
 });

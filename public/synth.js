@@ -2,6 +2,8 @@
 var volSlider = new Nexus.Slider("#synth-vol");
 var delay = new Nexus.Slider("#echo");
 var filterSlider = new Nexus.Slider("#synth-filter");
+var phaserSlider = new Nexus.Slider("#phaser-Slider");
+
 
 var synth = new Tone.PolySynth(6, Tone.Synth, {
 			"oscillator" : {
@@ -15,10 +17,17 @@ var delayGen = new Tone.FeedbackDelay(0.5,0.2);
 delayGen.wet.value = 0;
 
 var filter = new Tone.Filter(2000, "lowpass", -24);
+var phaser = new Tone.Phaser(0, 5, 1000);
 
+synth.chain( delayGen, filter, volume, phaser, Tone.Master );
 
-synth.chain( delayGen, filter, volume, Tone.Master );
+phaserSlider.min = 0;
+phaserSlider.max = 30;
+phaserSlider.value = 0;
 
+phaserSlider.on('change',function(value) {
+    phaser.frequency.value = value;
+})
 
 delay.min = 0;
 delay.max = 0.7;
