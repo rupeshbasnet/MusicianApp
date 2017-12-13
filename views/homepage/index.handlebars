@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-8 panel panel-default" style="min-height: 200px;">
-      <h5>global controls</h5>
+    <div class="col-lg-4 panel panel-primary" style="min-height: 200px;">
+      <h5>Global controls</h5>
       <br>
       <span id = "output"></span>
       <!-- <button id = "start_stop_btn" type = "button" class = "btn btn-success">Start/Stop</button> -->
@@ -13,20 +13,20 @@
       <br>
       <div id = "button"></div>
     </div>
-    <div class="col-lg-4 well" style="min-height: 200px;">
-      chat area
-      <p id = "list"></p>
+    <div class="col-lg-4 panel panel-primary drum-panel" style="min-height: 200px;">
+      <h5>Visualizer</h5>
+      <div id="oscilloscope"></div>
     </div>
+
   </div>
 
   <div class="row">
-    <div class="col-lg-4 well" style="min-height: 437px;">
-      <h4> synth controls </h4>
+    <div class="col-lg-4 panel panel-primary" style="min-height: 437px;">
+      <h5> Synth controls </h5>
       <div> volume </div>
       <div id="synth-vol"></div>
       <div> echo mix </div>
       <div id="echo"></div>
-      <div id="oscilloscope"></div>
       <br>
       <input id = "synth_pattern_title" type = "text" name = "title" placeholder = "Title"/>
       <input id = "synth_pattern_description" type = "text" name = "description" placeholder = "Description"/>
@@ -47,9 +47,16 @@
           <div id = "synth_save"></div>
       {{/if}}
 
+      <div> filter </div>
+      <div id="synth-filter"></div>
+      <div> phaser </div>
+      <div id="phaser-Slider"></div>
+
+      <div> oscillator type </div>
+      <div id="osc-button"></div>
+
     </div>
-    <div class="col-lg-8 panel panel-default">
-      <h2>Synth</h2>
+    <div class="col-lg-8 panel panel-primary drum-panel" style="min-height: 437px;">
       <div id = "steppers">
         <div id="SO" class="step"></div>
         <div id="S1" class="step"></div>
@@ -69,19 +76,39 @@
         <div id="S15" class="step"></div>
       </div>
       <div id = "synth"></div>
-      <span style="margin-left:14px; word-spacing:24.5px;">01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16</span>
+      <strong style="color: white;margin-left:14px; word-spacing:24.5px; ">01</strong>
+      <span style="margin-left:24.5px; word-spacing:24.5px;">02 03 04</span>
+      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">05</strong>
+      <span style="margin-left:24.5px; word-spacing:24.5px;">06 07 08</span>
+      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">09</strong>
+      <span style="margin-left:24.5px; word-spacing:24.5px;">10 11 12</span>
+      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">13</strong>
+      <span style="margin-left:24.5px; word-spacing:24.5px;">14 15 16</span>
       <br>
     </div>
   </div>
 
   <div class="row">
+
     <div class="col-lg-4 well" style="min-height: 261px;">
       drum controls
       <br>
-      <input id = "beat_title" type = "text" name = "title" placeholder = "Title"/>
-      <input id = "beat_description" type = "text" name = "description" placeholder = "Description"/>
-      <div id = "beatSelection">
-        <input id = "beat0" name = "beat" type = "radio" checked/>
+
+    <div class="col-lg-4 panel panel-primary" style="min-height: 290px;">
+      <h5>Drum controls</h5>
+      <div> volume </div>
+      <div id="drum-vol"></div>
+      <div> echo mix </div>
+      <div id="echo-drums"></div>
+      <div> filter </div>
+      <div id="drums-filter"></div>
+
+      {{#if cur_user }}
+        <br>
+        <input id = "beat_title" type = "text" name = "title" placeholder = "Title"/>
+        <input id = "beat_description" type = "text" name = "description" placeholder = "Description"/>
+        <div id = "beatSelection">
+          <input id = "beat0" name = "beat" type = "radio" checked/>
 
         <input id = "beat1" name = "beat" type = "radio" />
 
@@ -98,8 +125,7 @@
         {{/if}}
 
     </div>
-    <div class="col-lg-8 panel panel-default">
-      <h2>Drums</h2>
+    <div class="col-lg-8 panel panel-primary drum-panel" style="min-height: 290px;">
       <div id = "steppers">
         <div id="DO" class="step"></div>
         <div id="D1" class="step"></div>
@@ -119,29 +145,15 @@
         <div id="D15" class="step"></div>
       </div>
       <div id = "drums"></div>
-      <strong style="margin-left:14px; word-spacing:24.5px; ">01</strong>
+      <strong style="color: white;margin-left:14px; word-spacing:24.5px; ">01</strong>
       <span style="margin-left:24.5px; word-spacing:24.5px;">02 03 04</span>
-      <strong style="margin-left:24.5px; word-spacing:24.5px; ">05</strong>
+      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">05</strong>
       <span style="margin-left:24.5px; word-spacing:24.5px;">06 07 08</span>
-      <strong style="margin-left:24.5px; word-spacing:24.5px; ">09</strong>
+      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">09</strong>
       <span style="margin-left:24.5px; word-spacing:24.5px;">10 11 12</span>
-      <strong style="margin-left:24.5px; word-spacing:24.5px; ">13</strong>
+      <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">13</strong>
       <span style="margin-left:24.5px; word-spacing:24.5px;">14 15 16</span>
       <br>
-    </div>
-  </div>
-
-
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-      <br>
-
-      <br>
-
-
-      <br>
-
     </div>
   </div>
 </div>

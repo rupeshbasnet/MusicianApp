@@ -1,8 +1,10 @@
 // Global Loop
 Nexus.context = Tone.context
-
+Nexus.colors.accent = "#0be"
+Nexus.colors.fill = "#444449"
+Nexus.colors.dark = "white"
 var slider = new Nexus.Slider('#slider', {
-    'size': [600, 20],
+    'size': [350, 20],
     'mode': 'relative', // 'relative' or 'absolute'
     'min': 60,
     'max': 200,
@@ -39,10 +41,10 @@ slider.on('change', function(v) {
 });
 
 var oscilloscope = new Nexus.Oscilloscope('#oscilloscope',{
-  'size': [350,200]
+  'size': [350,140]
 })
 
-
+oscilloscope.colorize("fill", "black");
 
 function loopDrum(time, col) {
     var column = drumSequencer.matrix.column(col);
@@ -80,10 +82,11 @@ playbutton.on('change', function(v) {
     if (v) {
         loop.start();
         oscilloscope.connect( Tone.Master );
+        spectrogram.connect( Tone.Master );
     } else {
         loop.stop();
         oscilloscope.disconnect( Tone.Master );
+        spectrogram.disconnect ( Tone.Master );
+
     }
 });
-
-
