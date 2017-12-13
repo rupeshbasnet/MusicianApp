@@ -24,3 +24,16 @@ socket.on('tempo', function( data ) {
  slider.value = valueInt;
 
 });
+
+function playEmit() {
+  socket.emit('play',
+  { room: document.getElementById('room').value,
+    state: playbutton.state});
+}
+
+
+socket.on('play', function( data ) {
+    playbutton.click();
+});
+
+$('#button').click(playEmit);

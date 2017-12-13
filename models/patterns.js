@@ -1,9 +1,10 @@
 'use strict'
 
 module.exports = (sequelize, DataTypes) => {
-  const Beats = sequelize.define('Beats', {
+  const Patterns = sequelize.define('Patterns', {
     title: {
         type: DataTypes.STRING,
+        unique: 'compositeIndex',
         allowNull: false,
         validate: {
         notEmpty: true,
@@ -22,10 +23,9 @@ module.exports = (sequelize, DataTypes) => {
         },
   });
 
-  Beats.associate = (models) => {
-    // models.Choices.hasMany(models.Votes);
-    models.Beats.belongsTo(models.User);
+  Patterns.associate = (models) => {
+    models.Patterns.belongsTo(models.User);
   }
 
-  return Beats;
+  return Patterns;
 };

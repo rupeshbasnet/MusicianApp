@@ -1,161 +1,62 @@
-var beats = [];
 
-var savebutton = new Nexus.TextButton('#save', {
-  'size': [150, 50],
-  'state': false,
-  'text': 'Save',
-  'alternate': false,
+
+//Order must match the pattern_types array in patternControls.js
+var instruments = ["drums", "synth"];
+var save_btns = {};
+
+instruments.forEach(inst => {
+  save_btns[inst + '_save_btn'] =
+    new Nexus.TextButton('#' + inst + '_save', {
+      'size': [150, 50],
+      'state': false,
+      'text': 'Save',
+      'alternate': false,
+    });
 });
 
-function expand(array, rows) {
-  var matrix = [];
-  var subArray = [];
+function createPattern(params, pattern_type) {
 
-  var subArraySize = array.length / rows;
+  const patterns_type = pattern_type + 's';
+  const route = '/' + patterns_type;
 
-  for(var i = 0; i < rows; i++) {
-    for(var j = 0; j < subArraySize; j++) {
-      subArray.push(array[i*subArraySize + j]);
-    }
-    matrix.push(subArray);
-    subArray = [];
-  }
-  return matrix;
-}
-
-function boolify(array) {
-  return array.map(e => { return (e) ? 1:0; });
-}
-
-function flatten() {
-  var matrix = drumSequencer.matrix.pattern.map((e) => { return boolify(e); });
-
-  var rows = matrix.map(e => {return e.toString().replace(/,/g, '')});
-
-  var beatString = rows.join('');
-
-  var beatArray = beatString.split('').map(e => { return (e === '1') ? 1:0; });
-
-  return beatArray;
-}
-
-function getBeatSelected() {
-  return parseInt( document.querySelector('input[name=beat]:checked').id[4] );
-}
-
-function setBeat(i) {
-
-  document.getElementById('beatTitle').value = beats[i].title;
-  document.getElementById('beatDescription').value = beats[i].description;
-  drumSequencer.matrix.set.all(expand(beats[i].beatArray, 4));
-}
-
-function initBeats() {
-  let inputs = document.querySelectorAll('input[name=beat]');
-  let beatIds = document.querySelectorAll('input[name=beatId]');
-
-  for(let i = 0; i < beatIds.length; i++)
-  {
-
-    $.get(
-      '/beats/' + beatIds[i].value
-    )
-    .done(function(beat, statusText) {
-
-      beats[i] = beat;
-      inputs[i].addEventListener('click', function(){
-
-        setBeat(i);
-
-      });
-
-
-      if(i === 0) inputs[0].click();
-    });
-
-  }
-
-  if(beatIds.length < inputs.length)
-  {
-    var tempBeat = () => {
-      return new Object
-      ({
-      title: "",
-      description: "",
-      beatArray: Array(64).fill(0)
-      });
-    }
-    for(let i = beatIds.length; i < 4; i++)
-    {
-      if(beats.length < 4) beats[i] = tempBeat();
-      inputs[i].addEventListener('click', function(e){
-        setBeat(i);
-      });
-    }
-  }
-
-  // if(beatIds.length < inputs.length)
-  //   for(var i = beatIds.length; i < inputs.length; i++)
-  //     inputs[i].addEventListener('click', function(){
-  //       document.getElementById('beatTitle').value = "";
-  //       document.getElementById('beatDescription').value = "";
-  //       drumSequencer.matrix.set.all(expand(Array(64).fill(0), 4));
-  //     });
-
-}
-
-function loadBeats() {
-
-  initBeats();
-
-  $('#beatTitle').on('change', function(e) {
-    var beatNo = getBeatSelected();
-    beats[beatNo].title = e.target.value;
-  });
-
-  $('#beatDescription').on('change', function(e) {
-    var beatNo = getBeatSelected();
-    beats[beatNo].description = e.target.value;
-  });
-
-  drumSequencer.on('change', function() {
-    var beatNo = getBeatSelected();
-    beats[beatNo].beatArray = flatten();
-  });
-
-  savebutton.on('click', saveBeats);
-
-}
-
-function newBeat(params) {
   $.post(
-    '/beats',
+    route,
     params
   )
-  .done(function(beat, statusText) {
+  .done(function(ptrn, statusText) {
+
+    //console.log(statusText);
     // This block is optional, fires when the ajax call is complete
-    var beatIds = document.querySelectorAll('input[name=beatId]');
+    let patternArray = patterns[patterns_type];
+
+    var beatIds = document.querySelectorAll('input[name='+ pattern_type + 'Id]');
     var noBeats = beatIds.length;
 
-    if(noBeats < 4)
+    if(noBeats < PATTERN_LIMIT)
     {
-      beats[noBeats] = beat;
+      patternArray[noBeats] = ptrn;
     }
 
-    var beatSelection = document.getElementById('beatSelection');
-    var newBeatInput = document.createElement('input');
+    var container = document.querySelector('input[name='+ pattern_type + 'Id]').parentNode;
+    var save_btn = container.lastElementChild;
 
-    newBeatInput.name = "beatId";
-    newBeatInput.id = "beatId"+noBeats;
-    newBeatInput.type = "hidden";
-    newBeatInput.value = beat.id;
+    var patternInput = document.createElement('input');
 
+    patternInput.name = pattern_type + "Id";
+    patternInput.id = pattern_type + "Id" + noBeats;
+    patternInput.type = "hidden";
+    patternInput.value = ptrn.id;
+
+    container.insertBefore(patternInput, save_btn);
   });
 }
 
-function updateBeat(id, params) {
+function updatePattern(params, pattern_type, id) {
+
+  const route = '/' + pattern_type + 's/' + id;
+
   $.ajax({
-    url: '/beats/'+id,
+    url: route,
     type: 'PUT',
     data: params,
     success: function(result) {
@@ -164,57 +65,40 @@ function updateBeat(id, params) {
   });
 }
 
-function saveBeats() {
+function saveBeats(patterns_type) {
 
-  for(let i=0; i<4; i++)
+  const pattern_type = patterns_type.slice(0, -1);
+  let patternArray = patterns[patterns_type];
+
+  for(let i=0; i<PATTERN_LIMIT; i++)
   {
-    var title = beats[i].title;
-    var description = beats[i].description;
-    var beatArray = beats[i].beatArray;
 
-    if(title.length === 0 || description.length === 0)
+    var title = patternArray[i].title;
+    var description = patternArray[i].description;
+    var beatArray = patternArray[i].beatArray;
+    var id = patternArray[i].id;
+
+    if(title.length === 0)
       continue;
 
     var parameters = {
       title: title,
       description: description,
       beatArray: beatArray
-    }
+    };
 
-    if(beats[i].createdAt){
-      updateBeat(beats[i].id, parameters)
+    if(patternArray[i].createdAt){
+      updatePattern(parameters, pattern_type, id);
     }
     else {
-      newBeat(parameters);
+      createPattern(parameters, pattern_type);
     }
   }
 
 }
 
-document.addEventListener("keypress", function(e){
-  let key = e.key;
-  if(key.match(/5|6|7|8/))
-  {
-    let num = key - 5;
-    let input = document.getElementById('beat'+num);
+pattern_types.forEach((p_type, i) => {
+  save_btns[instruments[i] + '_save_btn'].on('click', () => saveBeats(p_type));
+})
 
-    input.click();
-  }
-
-});
-
-// $(function(){
-//
-//   let promise = new Promise(loadBeats);
-//
-//   promise.then(
-//     console.log('then', beats)
-//   );
-//
-//   promise.then( beats.forEach((e, i) => console.log(e, i)) );
-//
-//   promise.then( document.getElementById('beat0').click() );
-//
-// });
-
-$(loadBeats);
+//savebutton.on('click', () => saveBeats('beats'));

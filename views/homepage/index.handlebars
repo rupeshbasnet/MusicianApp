@@ -27,6 +27,26 @@
       <div> echo mix </div>
       <div id="echo"></div>
       <div id="oscilloscope"></div>
+      <br>
+      <input id = "synth_pattern_title" type = "text" name = "title" placeholder = "Title"/>
+      <input id = "synth_pattern_description" type = "text" name = "description" placeholder = "Description"/>
+      <div id = "patternSelection">
+        <input id = "synth_pattern0" name = "synth_pattern" type = "radio" checked/>
+
+        <input id = "synth_pattern1" name = "synth_pattern" type = "radio" />
+
+        <input id = "synth_pattern2" name = "synth_pattern" type = "radio" />
+
+        <input id = "synth_pattern3" name = "synth_pattern" type = "radio" />
+      </div>
+
+      {{#if cur_user}}
+        {{#each patterns}}
+          <input id = "synth_patternId{{@index}}" name = "synth_patternId" type = "hidden" value = "{{this.id}}"/>
+        {{/each}}
+          <div id = "synth_save"></div>
+      {{/if}}
+
     </div>
     <div class="col-lg-8 panel panel-default">
       <h2>Synth</h2>
@@ -57,29 +77,26 @@
   <div class="row">
     <div class="col-lg-4 well" style="min-height: 261px;">
       drum controls
-      {{#if cur_user }}
-        <br>
-        <input id = "beatTitle" type = "text" name = "title" placeholder = "Title"/>
-        <input id = "beatDescription" type = "text" name = "description" placeholder = "Description"/>
-        <div id = "beatSelection">
-          <input id = "beat0" name = "beat" type = "radio" checked/>
+      <br>
+      <input id = "beat_title" type = "text" name = "title" placeholder = "Title"/>
+      <input id = "beat_description" type = "text" name = "description" placeholder = "Description"/>
+      <div id = "beatSelection">
+        <input id = "beat0" name = "beat" type = "radio" checked/>
 
-          <input id = "beat1" name = "beat" type = "radio" />
+        <input id = "beat1" name = "beat" type = "radio" />
 
-          <input id = "beat2" name = "beat" type = "radio" />
+        <input id = "beat2" name = "beat" type = "radio" />
 
-          <input id = "beat3" name = "beat" type = "radio" />
+        <input id = "beat3" name = "beat" type = "radio" />
+      </div>
 
+        {{#if cur_user }}
           {{#each beats}}
             <input id = "beatId{{@index}}" name = "beatId" type = "hidden" value = "{{this.id}}"/>
           {{/each}}
-        </div>
+            <div id = "drums_save"></div>
+        {{/if}}
 
-        <div id = "save"></div>
-
-      {{else}}
-
-      {{/if}}
     </div>
     <div class="col-lg-8 panel panel-default">
       <h2>Drums</h2>
