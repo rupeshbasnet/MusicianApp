@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-4 panel panel-default" style="min-height: 200px;">
-      <h5>global controls</h5>
+    <div class="col-lg-4 panel panel-primary" style="min-height: 200px;">
+      <h5>Global controls</h5>
       <br>
       <span id = "output"></span>
       <!-- <button id = "start_stop_btn" type = "button" class = "btn btn-success">Start/Stop</button> -->
@@ -13,19 +13,16 @@
       <br>
       <div id = "button"></div>
     </div>
-    <div class="col-lg-4 panel panel-default" style="min-height: 200px;">
-      <h5>visualizer</h5>
+    <div class="col-lg-4" style="min-height: 200px;">
+      <h5>Visualizer</h5>
       <div id="oscilloscope"></div>
     </div>
-    <div class="col-lg-4 well" style="min-height: 200px;">
 
-      <p id = "list"></p>
-    </div>
   </div>
 
   <div class="row">
-    <div class="col-lg-4 well" style="min-height: 437px;">
-      <h4> synth controls </h4>
+    <div class="col-lg-4 panel panel-primary" style="min-height: 437px;">
+      <h5> Synth controls </h5>
       <div> volume </div>
       <div id="synth-vol"></div>
       <div> echo mix </div>
@@ -35,8 +32,7 @@
       <div> oscillator type </div>
       <div id="osc-button"></div>
     </div>
-    <div class="col-lg-8 panel panel-default">
-      <h2>Synth</h2>
+    <div class="col-lg-8">
       <div id = "steppers">
         <div id="SO" class="step"></div>
         <div id="S1" class="step"></div>
@@ -62,8 +58,8 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-4 well" style="min-height: 261px;">
-      drum controls
+    <div class="col-lg-4 panel panel-primary" style="min-height: 261px;">
+      <h5>Drum controls</h5>
       {{#if cur_user }}
         <br>
         <input id = "beatTitle" type = "text" name = "title" placeholder = "Title"/>
@@ -88,8 +84,7 @@
 
       {{/if}}
     </div>
-    <div class="col-lg-8 panel panel-default">
-      <h2>Drums</h2>
+    <div class="col-lg-8">
       <div id = "steppers">
         <div id="DO" class="step"></div>
         <div id="D1" class="step"></div>

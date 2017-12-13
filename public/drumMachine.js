@@ -20,4 +20,4 @@ var drums = new Tone.Players({
 
 var notes = ["Hihat", "Hat", "Sistersnare", "Kick" ];
 
-drumSequencer.colorize("accent", "orange");
+drumSequencer.colorize("accent", "#0be");
