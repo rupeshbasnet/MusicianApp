@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Beats.associate = (models) => {
-    // models.Choices.hasMany(models.Votes);
+
     models.Beats.belongsTo(models.User);
   }
 

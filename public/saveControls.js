@@ -1,12 +1,10 @@
-
-
 //Order must match the pattern_types array in patternControls.js
 var instruments = ["drums", "synth"];
 var save_btns = {};
 
 instruments.forEach(inst => {
   save_btns[inst + '_save_btn'] =
-    new Nexus.TextButton('#' + inst + '_save', {
+    new Nexus.TextButton('#' + inst + '_save_btn', {
       'size': [150, 50],
       'state': false,
       'text': 'Save',
@@ -48,6 +46,12 @@ function createPattern(params, pattern_type) {
     patternInput.value = ptrn.id;
 
     container.insertBefore(patternInput, save_btn);
+
+    console.log(ptrn);
+
+    return ptrn;
+  }).fail(function(jqXHR, status, err){
+    console.log(err);
   });
 }
 
@@ -69,12 +73,10 @@ function updatePattern(params, pattern_type, id) {
 function saveBeats(patterns_type) {
 
   const pattern_type = patterns_type.slice(0, -1);
-  let patternArray = patterns[patterns_type];
+  var patternArray = patterns[patterns_type];
 
   for(let i=0; i<PATTERN_LIMIT; i++)
   {
-
-    console.log(patternArray[i]);
 
     var title = patternArray[i].title;
     var description = patternArray[i].description;
@@ -92,9 +94,12 @@ function saveBeats(patterns_type) {
 
     if(patternArray[i].createdAt){
       updatePattern(parameters, pattern_type, id);
+
     }
     else {
       createPattern(parameters, pattern_type);
+      patternArray[i].id = document.querySelector('input [name='+pattern_type+'Id'+i+']').value;
+      patternArray[i].createdAt = true;
     }
   }
 

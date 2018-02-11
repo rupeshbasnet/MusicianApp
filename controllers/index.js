@@ -32,8 +32,9 @@ router.get('/', (req, res) => {
       req.user.getPatterns()
       .then(myPatterns => {
 
-        myPatterns.forEach((ptrn) => {
-          console.log(ptrn.dataValues);
+        myPatterns
+        .sort((a, b) => { return a.dataValues.id - b.dataValues.id })
+        .forEach((ptrn) => {
           synth_patterns.push(ptrn.dataValues);
         });
       })

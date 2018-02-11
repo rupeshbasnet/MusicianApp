@@ -3,7 +3,7 @@ const models = require('../models');
 
 const router = express.Router();
 
-// This route retrieves a list of all beats
+// This route retrieves a list of all patterns
 router.get('/', (req, res) => {
   models.Patterns.findAll()
     .then((allPatterns) => {
