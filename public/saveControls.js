@@ -17,7 +17,7 @@ function createPattern(params, pattern_type) {
   const patterns_type = pattern_type + 's';
   const route = '/' + patterns_type;
 
-  $.post(
+  return $.post(
     route,
     params
   )
@@ -47,9 +47,6 @@ function createPattern(params, pattern_type) {
 
     container.insertBefore(patternInput, save_btn);
 
-    console.log(ptrn);
-
-    return ptrn;
   }).fail(function(jqXHR, status, err){
     console.log(err);
   });
@@ -58,9 +55,8 @@ function createPattern(params, pattern_type) {
 function updatePattern(params, pattern_type, id) {
 
   const route = '/' + pattern_type + 's/' + id;
-  console.log(route);
 
-  $.ajax({
+  return $.ajax({
     url: route,
     type: 'PUT',
     data: params,
@@ -75,6 +71,8 @@ function saveBeats(patterns_type) {
   const pattern_type = patterns_type.slice(0, -1);
   var patternArray = patterns[patterns_type];
 
+  var promises = [];
+
   for(let i=0; i<PATTERN_LIMIT; i++)
   {
 
@@ -83,9 +81,6 @@ function saveBeats(patterns_type) {
     var beatArray = patternArray[i].beatArray;
     var id = patternArray[i].id;
 
-    if(title.length === 0)
-      continue;
-
     var parameters = {
       title: title,
       description: description,
@@ -93,15 +88,24 @@ function saveBeats(patterns_type) {
     };
 
     if(patternArray[i].createdAt){
-      updatePattern(parameters, pattern_type, id);
-
+      promises.push( updatePattern(parameters, pattern_type, id) );
     }
     else {
-      createPattern(parameters, pattern_type);
-      patternArray[i].id = document.querySelector('input [name='+pattern_type+'Id'+i+']').value;
-      patternArray[i].createdAt = true;
+      promises.push( createPattern(parameters, pattern_type) );
     }
+
   }
+
+  $.when.apply($, promises).then(function(){
+    for(let i=0; i<PATTERN_LIMIT; i++) {
+
+      if(!patternArray[i].createdAt) {
+        patternArray[i].createdAt = true;
+        patternArray[i].id = document.querySelector('input [name='+pattern_type+'Id'+i+']').value;
+      }
+
+    }
+  });
 
 }
 
