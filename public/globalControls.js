@@ -81,7 +81,7 @@ var recordbutton = new Nexus.TextButton('#record', {
     'state': false,
     'text': 'Record',
     'alternate': false,
-    'alternateText': 'Stop'
+    'alternateText': 'Stop Recording'
 })
 
 recordbutton.on('change', function(v) {

@@ -5,9 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     title: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-        notEmpty: true,
-        },
     },
     description: {
             type: DataTypes.STRING,
@@ -23,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Beats.associate = (models) => {
-    // models.Choices.hasMany(models.Votes);
+
     models.Beats.belongsTo(models.User);
   }
 

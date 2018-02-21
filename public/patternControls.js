@@ -85,13 +85,11 @@ function init(patterns_type) {
       patternArray[i] = pattern;
 
       inputs[i].addEventListener('click', function(){
-
         set(pattern_type, i);
       });
 
       if(i === getSelected(pattern_type)) inputs[i].click();
     });
-
   }
 
   if(ids.length < inputs.length)

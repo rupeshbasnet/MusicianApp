@@ -1,12 +1,10 @@
-
-
 //Order must match the pattern_types array in patternControls.js
 var instruments = ["drums", "synth"];
 var save_btns = {};
 
 instruments.forEach(inst => {
   save_btns[inst + '_save_btn'] =
-    new Nexus.TextButton('#' + inst + '_save', {
+    new Nexus.TextButton('#' + inst + '_save_btn', {
       'size': [150, 50],
       'state': false,
       'text': 'Save',
@@ -19,7 +17,7 @@ function createPattern(params, pattern_type) {
   const patterns_type = pattern_type + 's';
   const route = '/' + patterns_type;
 
-  $.post(
+  return $.post(
     route,
     params
   )
@@ -48,15 +46,17 @@ function createPattern(params, pattern_type) {
     patternInput.value = ptrn.id;
 
     container.insertBefore(patternInput, save_btn);
+
+  }).fail(function(jqXHR, status, err){
+    console.log(err);
   });
 }
 
 function updatePattern(params, pattern_type, id) {
 
   const route = '/' + pattern_type + 's/' + id;
-  console.log(route);
 
-  $.ajax({
+  return $.ajax({
     url: route,
     type: 'PUT',
     data: params,
@@ -69,20 +69,17 @@ function updatePattern(params, pattern_type, id) {
 function saveBeats(patterns_type) {
 
   const pattern_type = patterns_type.slice(0, -1);
-  let patternArray = patterns[patterns_type];
+  var patternArray = patterns[patterns_type];
+
+  var promises = [];
 
   for(let i=0; i<PATTERN_LIMIT; i++)
   {
-
-    console.log(patternArray[i]);
 
     var title = patternArray[i].title;
     var description = patternArray[i].description;
     var beatArray = patternArray[i].beatArray;
     var id = patternArray[i].id;
-
-    if(title.length === 0)
-      continue;
 
     var parameters = {
       title: title,
@@ -91,12 +88,24 @@ function saveBeats(patterns_type) {
     };
 
     if(patternArray[i].createdAt){
-      updatePattern(parameters, pattern_type, id);
+      promises.push( updatePattern(parameters, pattern_type, id) );
     }
     else {
-      createPattern(parameters, pattern_type);
+      promises.push( createPattern(parameters, pattern_type) );
     }
+
   }
+
+  $.when.apply($, promises).then(function(){
+    for(let i=0; i<PATTERN_LIMIT; i++) {
+
+      if(!patternArray[i].createdAt) {
+        patternArray[i].createdAt = true;
+        patternArray[i].id = document.querySelector('input [name='+pattern_type+'Id'+i+']').value;
+      }
+
+    }
+  });
 
 }
 

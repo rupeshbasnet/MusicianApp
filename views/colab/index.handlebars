@@ -50,17 +50,7 @@
       <div> echo mix </div>
       <div id="echo"></div>
       <br>
-      <input id = "pattern_title" type = "hidden" name = "title" placeholder = "Title"/>
-      <input id = "pattern_description" type = "hidden" name = "description" placeholder = "Description"/>
-      <div id = "patternSelection">
-        <input id = "pattern0" name = "pattern" type = "radio" checked/>
 
-        <input id = "pattern1" name = "pattern" type = "radio" />
-
-        <input id = "pattern2" name = "pattern" type = "radio" />
-
-        <input id = "pattern3" name = "pattern" type = "radio" />
-      </div>
 
       <div> filter </div>
       <div id="synth-filter"></div>
@@ -69,6 +59,20 @@
 
       <div> oscillator type </div>
       <div id="osc-button"></div>
+
+
+      <input id = "synth_pattern_title" style="background-color: #222" type = "text" name = "title" placeholder = "Title"/>
+      <input id = "synth_pattern_description" type = "text" name = "description" placeholder = "Description"/>
+      <div id = "synth_patternSelection">
+        <input id = "synth_pattern0" name = "synth_pattern" type = "radio" checked/>
+
+        <input id = "synth_pattern1" name = "synth_pattern" type = "radio" />
+
+        <input id = "synth_pattern2" name = "synth_pattern" type = "radio" />
+
+        <input id = "synth_pattern3" name = "synth_pattern" type = "radio" />
+
+      </div>
 
     </div>
     <div class="col-lg-8 panel panel-primary drum-panel" style="min-height: 437px;">
@@ -115,22 +119,7 @@
 
   <div class="row">
 
-    <div class="col-lg-4 well" style="min-height: 261px;">
-      Drum controls
-      <br>
-      <input id = "beat_title" type = "hidden" name = "title" placeholder = "Title"/>
-      <input id = "beat_description" type = "hidden" name = "description" placeholder = "Description"/>
-      <div id = "beatSelection">
-        <input id = "beat0" name = "beat" type = "radio" checked/>
-
-        <input id = "beat1" name = "beat" type = "radio" />
-
-        <input id = "beat2" name = "beat" type = "radio" />
-
-        <input id = "beat3" name = "beat" type = "radio" />
-      </div>
-
-      <div class="col-lg-4 panel panel-primary" style="min-height: 290px;">
+    <div class="col-lg-4 panel panel-primary" style="min-height: 290px;">
       <h5>Drum controls</h5>
       <div> volume </div>
       <div id="drum-vol"></div>
@@ -139,38 +128,41 @@
       <div> filter </div>
       <div id="drums-filter"></div>
 
-      </div>
-      <div class="col-lg-8 panel panel-primary drum-panel" style="min-height: 290px;">
-        <div id = "steppers">
-          <div id="DO" class="step"></div>
-          <div id="D1" class="step"></div>
-          <div id="D2" class="step"></div>
-          <div id="D3" class="step"></div>
-          <div id="D4" class="step"></div>
-          <div id="D5" class="step"></div>
-          <div id="D6" class="step"></div>
-          <div id="D7" class="step"></div>
-          <div id="D8" class="step"></div>
-          <div id="D9" class="step"></div>
-          <div id="D10" class="step"></div>
-          <div id="D11" class="step"></div>
-          <div id="D12" class="step"></div>
-          <div id="D13" class="step"></div>
-          <div id="D14" class="step"></div>
-          <div id="D15" class="step"></div>
-        </div>
-        <div id = "drums"></div>
-        <strong style="color: white;margin-left:14px; word-spacing:24.5px; ">01</strong>
-        <span style="margin-left:24.5px; word-spacing:24.5px;">02 03 04</span>
-        <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">05</strong>
-        <span style="margin-left:24.5px; word-spacing:24.5px;">06 07 08</span>
-        <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">09</strong>
-        <span style="margin-left:24.5px; word-spacing:24.5px;">10 11 12</span>
-        <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">13</strong>
-        <span style="margin-left:24.5px; word-spacing:24.5px;">14 15 16</span>
         <br>
-      </div>
+        <input id = "beat_title" type = "text" name = "title" placeholder = "Title"/>
+        <input id = "beat_description" type = "text" name = "description" placeholder = "Description"/>
+        <div id = "beatSelection">
+          <input id = "beat0" name = "beat" type = "radio" checked/>
 
+          <input id = "beat1" name = "beat" type = "radio" />
+
+          <input id = "beat2" name = "beat" type = "radio" />
+
+          <input id = "beat3" name = "beat" type = "radio" />
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-8 panel panel-primary drum-panel" style="min-height: 290px;">
+      <div id = "steppers">
+        <div id="DO" class="step"></div>
+        <div id="D1" class="step"></div>
+        <div id="D2" class="step"></div>
+        <div id="D3" class="step"></div>
+        <div id="D4" class="step"></div>
+        <div id="D5" class="step"></div>
+        <div id="D6" class="step"></div>
+        <div id="D7" class="step"></div>
+        <div id="D8" class="step"></div>
+        <div id="D9" class="step"></div>
+        <div id="D10" class="step"></div>
+        <div id="D11" class="step"></div>
+        <div id="D12" class="step"></div>
+        <div id="D13" class="step"></div>
+        <div id="D14" class="step"></div>
+        <div id="D15" class="step"></div>
+      </div>
       <div id = "drums"></div>
       <div id = "drumIds">
         <div id = "drumId">Hihat</div>
@@ -187,7 +179,7 @@
       <strong style="color: white; margin-left:24.5px; word-spacing:24.5px; ">13</strong>
       <span style="margin-left:24.5px; word-spacing:24.5px;">14 15 16</span>
       <br>
-
     </div>
+
   </div>
 </div>
