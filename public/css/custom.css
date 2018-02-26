@@ -59,26 +59,20 @@ input[type="text"]:-moz-placeholder { /* Firefox 18- */
   display: inline-block;
 }
 
-#synthIds {
-  height: 350px;
-  display: inline-block;
-}
-
-#synthId {
-  height: 13.4%;
-}
-
 #drums {
   display: inline-block;
 }
 
-#drumIds {
-  height: 176px;
+#synthIds, #drumIds {
+  position: absolute;
   display: inline-block;
 }
 
-#drumId {
-  height: 30%;
+#synthId, #drumId  {
+  height: 44px;
+  padding-top: 12px;
+  padding-left: 5px;
+  color: white;
 }
 
 ul {
@@ -93,8 +87,6 @@ ul {
 .step-numbers strong{
   color: white;
 }
-
-
 
 #synth_save_btn, #drums_save_btn{ display: none; }
 /* hide save buttons for now */
