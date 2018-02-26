@@ -90,3 +90,10 @@ ul {
 }
 
 #synth_save_btn, #drums_save_btn{ display: none; }
+/* hide save buttons for now */
+
+@media (max-width: 1199px){
+  .container {
+    width:760px;
+  }
+}
