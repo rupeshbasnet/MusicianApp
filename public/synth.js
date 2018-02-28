@@ -1,6 +1,12 @@
 /* ------------ Synth ------------ */
 var volSlider = new Nexus.Slider("#synth-vol");
 var delay = new Nexus.Slider("#echo");
+var synthDelayTime = new Nexus.Select('#synth-delay-time',{
+  'size': [100,30],
+  'options': ['1/4','1/2','1/8']
+});
+
+
 var filterSlider = new Nexus.Slider("#synth-filter");
 var phaserSlider = new Nexus.Slider("#phaser-Slider");
 
