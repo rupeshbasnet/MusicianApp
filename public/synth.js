@@ -3,7 +3,7 @@ var volSlider = new Nexus.Slider("#synth-vol");
 var delay = new Nexus.Slider("#echo");
 var synthDelayTime = new Nexus.Select('#synth-delay-time',{
   'size': [100,30],
-  'options': ['1/4','1/2','1/8','1/8 .','1/16']
+  'options': ['1/4','1/8','1/8 .','1/16']
 });
 
 var filterSlider = new Nexus.Slider("#synth-filter");
@@ -51,9 +51,6 @@ synthDelayTime.on('change',function(v) {
 	switch (v.value) {
     case "1/4":
         synthDelayCoefficient = 1;
-        break;
-    case "1/2":
-        synthDelayCoefficient = .5;
         break;
     case "1/8":
         synthDelayCoefficient = 2;
