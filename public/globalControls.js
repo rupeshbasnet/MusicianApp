@@ -3,7 +3,7 @@ Nexus.context = Tone.context
 Nexus.colors.accent = "#0be"
 Nexus.colors.fill = "#444449"
 Nexus.colors.dark = "white"
-var slider = new Nexus.Slider('#slider', {
+var slider = new Nexus.Slider('#tempo-slider', {
     'size': [350, 20],
     'mode': 'relative', // 'relative' or 'absolute'
     'min': 60,

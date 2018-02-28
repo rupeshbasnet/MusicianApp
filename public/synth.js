@@ -13,7 +13,7 @@ var synth = new Tone.PolySynth(6, Tone.Synth, {
 		  });
 
 var volume = new Tone.Volume(0);
-var delayGen = new Tone.FeedbackDelay(0.5,0.2);
+var delayGen = new Tone.FeedbackDelay(0.500,0.2);
 delayGen.wet.value = 0;
 
 var filter = new Tone.Filter(2000, "lowpass", -24);
@@ -36,6 +36,8 @@ delay.value = 0;
 delay.on('change',function(value) {
 	delayGen.wet.value = value;
 })
+
+delayGen.delayTime.value = 0.100;
 
 
 filterSlider.min = 50;

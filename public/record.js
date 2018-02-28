@@ -1,9 +1,14 @@
 var audio_context;
 var recorder;
 
+
+
+// test recording of oscillator
 var ac = new AudioContext();
 var osc = ac.createOscillator();
 var dest = ac.createMediaStreamDestination();
+
+
 
 function startUserMedia(stream) {
   var input = audio_context.createMediaStreamSource(stream);
@@ -12,13 +17,13 @@ function startUserMedia(stream) {
 }
 
 function startRecording() {
-  osc.start(0);
+  // osc.start(0);
   recorder && recorder.record
 
 }
 
 function stopRecording() {
-  osc.stop(0);
+  // osc.stop(0);
   recorder && recorder.stop();
   createDownloadLink();
   recorder.clear();
