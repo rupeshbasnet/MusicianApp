@@ -3,9 +3,8 @@ var volSlider = new Nexus.Slider("#synth-vol");
 var delay = new Nexus.Slider("#echo");
 var synthDelayTime = new Nexus.Select('#synth-delay-time',{
   'size': [100,30],
-  'options': ['1/4','1/2','1/8']
+  'options': ['1/4','1/2','1/8','1/8 .','1/16']
 });
-
 
 var filterSlider = new Nexus.Slider("#synth-filter");
 var phaserSlider = new Nexus.Slider("#phaser-Slider");
@@ -42,6 +41,34 @@ delay.value = 0;
 delay.on('change',function(value) {
 	delayGenSynth.wet.value = value;
 })
+
+
+
+
+// set delay time based on dropdown, and tempo slider
+var synthDelayCoefficient = 1;
+synthDelayTime.on('change',function(v) {
+	switch (v.value) {
+    case "1/4":
+        synthDelayCoefficient = 1;
+        break;
+    case "1/2":
+        synthDelayCoefficient = .5;
+        break;
+    case "1/8":
+        synthDelayCoefficient = 2;
+        break;
+		case "1/8 .":
+		    synthDelayCoefficient = 1+(1/3);
+		    break;
+		case "1/16":
+		    synthDelayCoefficient = 4;
+		    break;
+	}
+
+	delayGenSynth.delayTime.value = 1/(slider.value * synthDelayCoefficient / 60);
+	console.log( 1/(slider.value * synthDelayCoefficient / 60) );
+});
 
 
 filterSlider.min = 50;
