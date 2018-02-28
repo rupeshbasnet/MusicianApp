@@ -37,8 +37,8 @@ number.link(slider);
 slider.on('change', function(v) {
 
     Tone.Transport.bpm.value = parseFloat(v);
-    delayGen.delayTime.value = 1/(slider.value / 60); // time synth delay to global bpm
-    
+    delayGenSynth.delayTime.value = 1/(slider.value / 60); // time synth delay to global bpm
+    delayGenDrums.delayTime.value = 1/(slider.value / 60); // time drum delay to global bpm
     //tempoEmit();
 });
 

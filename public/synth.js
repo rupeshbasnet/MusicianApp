@@ -13,13 +13,13 @@ var synth = new Tone.PolySynth(6, Tone.Synth, {
 		  });
 
 var volume = new Tone.Volume(0);
-var delayGen = new Tone.FeedbackDelay(0.500,0.2);
-delayGen.wet.value = 0;
+var delayGenSynth = new Tone.FeedbackDelay(0.500,0.2);
+delayGenSynth.wet.value = 0;
 
 var filter = new Tone.Filter(2000, "lowpass", -24);
 var phaser = new Tone.Phaser(0, 5, 1000);
 
-synth.chain( delayGen, filter, volume, phaser, Tone.Master );
+synth.chain( delayGenSynth, filter, volume, phaser, Tone.Master );
 
 phaserSlider.min = 0;
 phaserSlider.max = 30;
@@ -34,7 +34,7 @@ delay.max = 0.7;
 delay.value = 0;
 
 delay.on('change',function(value) {
-	delayGen.wet.value = value;
+	delayGenSynth.wet.value = value;
 })
 
 
