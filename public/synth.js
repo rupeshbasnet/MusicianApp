@@ -37,8 +37,6 @@ delay.on('change',function(value) {
 	delayGen.wet.value = value;
 })
 
-delayGen.delayTime.value = 0.100;
-
 
 filterSlider.min = 50;
 filterSlider.max = 10000;
