@@ -64,7 +64,7 @@ function loopSynth(time, col) {
     for (var i = 0; i < 8; i++) {
         if (column[i]) {
             var vel = Math.random() * 0.5 + 0.5;
-            synth.triggerAttackRelease(synthNotes[i], '16n');
+            synth.triggerAttackRelease(curScale[i], '16n');
             synthSequencer.stepper.value = col;
         }
     }
