@@ -3,6 +3,11 @@ output = [];
 
 var volSliderDrums = new Nexus.Slider("#drum-vol");
 var delayDrums = new Nexus.Slider("#echo-drums");
+var drumDelayTime = new Nexus.Select('#drum-delay-time',{
+  'size': [100,30],
+  'options': ['1/4','1/8','1/8 .','1/16']
+});
+
 var filterSliderDrums = new Nexus.Slider("#drums-filter");
 
 
@@ -30,6 +35,29 @@ delayDrums.value = 0;
 delayDrums.on('change',function(value) {
     delayGenDrums.wet.value = value;
 })
+
+// set delay time based on dropdown, and tempo slider
+var drumDelayCoefficient = 1;
+drumDelayTime.on('change',function(v) {
+	switch (v.value) {
+    case "1/4":
+        drumDelayCoefficient = 1;
+        break;
+    case "1/8":
+        drumDelayCoefficient = 2;
+        break;
+		case "1/8 .":
+		    drumDelayCoefficient = 1+(1/3);
+		    break;
+		case "1/16":
+		    drumDelayCoefficient = 4;
+		    break;
+	}
+
+  delayGenDrums.delayTime.value = 1/(slider.value * drumDelayCoefficient / 60);
+	console.log( 1/(slider.value * drumDelayCoefficient / 60) );
+});
+
 
 
 filterSliderDrums.min = 50;

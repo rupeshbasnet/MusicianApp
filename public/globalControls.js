@@ -3,7 +3,7 @@ Nexus.context = Tone.context
 Nexus.colors.accent = "#0be"
 Nexus.colors.fill = "#444449"
 Nexus.colors.dark = "white"
-var slider = new Nexus.Slider('#slider', {
+var slider = new Nexus.Slider('#tempo-slider', {
     'size': [350, 20],
     'mode': 'relative', // 'relative' or 'absolute'
     'min': 60,
@@ -35,8 +35,10 @@ number.link(slider);
 
 
 slider.on('change', function(v) {
-    console.log(v);
+
     Tone.Transport.bpm.value = parseFloat(v);
+    delayGenSynth.delayTime.value = 1/(slider.value * synthDelayCoefficient / 60); // time synth delay to global bpm
+    delayGenDrums.delayTime.value = 1/(slider.value * drumDelayCoefficient / 60); // time drum delay to global bpm
     //tempoEmit();
 });
 
@@ -62,7 +64,7 @@ function loopSynth(time, col) {
     for (var i = 0; i < 8; i++) {
         if (column[i]) {
             var vel = Math.random() * 0.5 + 0.5;
-            synth.triggerAttackRelease(synthNotes[i], '16n');
+            synth.triggerAttackRelease(curScale[i], '16n');
             synthSequencer.stepper.value = col;
         }
     }
