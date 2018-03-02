@@ -156,7 +156,6 @@ document.addEventListener("keypress", function(e){
     let input = document.getElementById('synth_pattern'+num);
 
     input.click();
-    $("#synth").click();
   }
   else if(key.match(/5|6|7|8/))
   {
@@ -164,69 +163,9 @@ document.addEventListener("keypress", function(e){
     let input = document.getElementById('beat'+num);
 
     input.click();
-    $("#drums").click();
   }
 
 });
-
-var lastActiveSeq;
-var copiedPattern;
-
-$("#drums, #synth").on("click", seqActive);
-
-$(document).on("keydown", (e) => {
-  let key = e.key;
-  if(key === "c" && e.metaKey)
-  {
-    copyPattern();
-  }
-  else if(key === "v" && e.metaKey)
-  {
-    pastePattern();
-  }
-});
-
-function seqActive(e){
-  let eid = e.currentTarget.id;
-  if(lastActiveSeq && lastActiveSeq !== eid){
-    resetPattern(eid);
-  }
-  lastActiveSeq = eid;
-}
-
-function copyPattern(){
-  let patternType, p;
-
-  if(lastActiveSeq === "drums")
-    p = pattern_types[0];
-  else if(lastActiveSeq === "synth")
-    p = pattern_types[1];
-
-  patternType = p.slice(0, -1);
-
-  let s = getSelected(patternType);
-
-  copiedPattern = (patterns[p][s]).beatArray;
-}
-
-function pastePattern(){
-  let p;
-
-  if(lastActiveSeq === "drums")
-    p = pattern_types[0];
-  else if(lastActiveSeq === "synth")
-    p = pattern_types[1];
-
-  let seq = seqs[p];
-  seq.matrix.set.all(expand(copiedPattern, seq.matrix.pattern.length));
-}
-
-function resetPattern(eid){
-  if(eid === "drums")
-    copiedPattern = Array( 64 ).fill(0);
-  else if(eid === "synth")
-    copiedPattern = Array( 128 ).fill(0);
-}
 
 $(loadBeats);
 $(setupPatternControls);
