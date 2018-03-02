@@ -1,14 +1,10 @@
 var audio_context;
 var recorder;
 
-
-
 // test recording of oscillator
 var ac = new AudioContext();
 var osc = ac.createOscillator();
 var dest = ac.createMediaStreamDestination();
-
-
 
 function startUserMedia(stream) {
   var input = audio_context.createMediaStreamSource(stream);
@@ -18,7 +14,7 @@ function startUserMedia(stream) {
 
 function startRecording() {
   // osc.start(0);
-  recorder && recorder.record
+  recorder && recorder.record();
 
 }
 
@@ -61,6 +57,7 @@ window.onload = function init() {
     } catch (e) {
       alert('No web audio support in this browser!');
     }
-    navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
-    });
+    // navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
+    // });
+    recorder = new Recorder(Tone.Master.output);
   };
