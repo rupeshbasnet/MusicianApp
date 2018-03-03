@@ -217,11 +217,10 @@ function initSeq(){
 
 function seqActive(e){
   let eid = e.currentTarget.id;
-  // if(lastActiveSeq && lastActiveSeq !== eid){
-  //   lastActiveSeq = undefined;
-  // }
+  if(lastActiveSeq && lastActiveSeq !== eid){
+    lastActiveSeq = undefined;
+  }
   lastActiveSeq = eid;
-
 }
 
 function copyPattern(){
@@ -234,6 +233,8 @@ function copyPattern(){
     p = pattern_types[0];
   else if(lastActiveSeq === "synth")
     p = pattern_types[1];
+  else
+    return;
 
   patternType = p.slice(0, -1);
 
