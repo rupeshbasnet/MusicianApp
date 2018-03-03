@@ -11,6 +11,8 @@ var seqs = {
   'synth_patterns': synthSequencer,
 };
 
+var insts = ["drums", "synth"];
+
 pattern_types.forEach(e => patterns[e] = eval(e));
 
 function expand(array, rows) {
@@ -156,7 +158,7 @@ document.addEventListener("keypress", function(e){
     let input = document.getElementById('synth_pattern'+num);
 
     input.click();
-    $("#synth").click();
+    $("#synth")[0].click();
   }
   else if(key.match(/5|6|7|8/))
   {
@@ -164,7 +166,7 @@ document.addEventListener("keypress", function(e){
     let input = document.getElementById('beat'+num);
 
     input.click();
-    $("#drums").click();
+    $("#drums")[0].click();
   }
 
 });
@@ -186,16 +188,47 @@ $(document).on("keydown", (e) => {
   }
 });
 
+function initSeq(){
+  let count = 0;
+  for(let key in seqs)
+  {
+    let i = count;
+    seqs[key].on('change', () => {
+      lastActiveSeq = insts[i];
+    });
+    count++;
+  }
+
+
+  $('.row').click(function(e){
+    $('.row div').removeClass('active-row');
+    let el = $(e.currentTarget).children()[0];
+    $(el).addClass('active-row');
+    for(let inst of insts){
+      if($(el.parentNode).hasClass(inst))
+        {
+          lastActiveSeq = inst;
+          return;
+        }
+    }
+    lastActiveSeq = undefined;
+  });
+}
+
 function seqActive(e){
   let eid = e.currentTarget.id;
-  if(lastActiveSeq && lastActiveSeq !== eid){
-    lastActiveSeq = undefined;
-  }
+  // if(lastActiveSeq && lastActiveSeq !== eid){
+  //   lastActiveSeq = undefined;
+  // }
   lastActiveSeq = eid;
+
 }
 
 function copyPattern(){
   let patternType, p;
+
+  if(!lastActiveSeq)
+    return;
 
   if(lastActiveSeq === "drums")
     p = pattern_types[0];
@@ -212,13 +245,15 @@ function copyPattern(){
 function pastePattern(){
   let p;
 
-  if(!lastActiveSeq)
+  if(!lastActiveSeq || !copiedPattern)
     return;
 
-  if(lastActiveSeq === "drums")
+  if(lastActiveSeq === "drums" && copiedPattern.length === 64)
     p = pattern_types[0];
-  else if(lastActiveSeq === "synth")
+  else if(lastActiveSeq === "synth" && copiedPattern.length === 128)
     p = pattern_types[1];
+  else
+    return;
 
   let seq = seqs[p];
   seq.matrix.set.all(expand(copiedPattern, seq.matrix.pattern.length));
@@ -226,3 +261,4 @@ function pastePattern(){
 
 $(loadBeats);
 $(setupPatternControls);
+$(initSeq);

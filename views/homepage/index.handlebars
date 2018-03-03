@@ -1,184 +1,187 @@
 <div class="container">
-  <div class="row">
-    <div class="col-lg-4 panel panel-primary" style="min-height: 200px;">
-      <h5>Global controls</h5>
-      <span id = "output"></span>
-      <!-- <button id = "start_stop_btn" type = "button" class = "btn btn-success">Start/Stop</button> -->
+  <div class="global row">
+    <div style="min-height: 204px; min-width: 750px; display: inline-block;">
+      <div class="col-lg-4 panel panel-primary" style="min-height: 200px;">
+        <h5>Global controls</h5>
+        <span id = "output"></span>
+        <!-- <button id = "start_stop_btn" type = "button" class = "btn btn-success">Start/Stop</button> -->
 
-      <div id = "tempo-slider">
-        <div id = "tempodisplay"></div>
-      </div>
-      <br>
-      <br>
-      <div id = "button"></div>
-      <div id = "record"></div>
-      <ul id="recordingslist"></ul>
-    </div>
-    <div class="col-lg-4 panel panel-primary drum-panel" style="min-height: 200px;">
-      <h5>Visualizer</h5>
-      <div id="oscilloscope"></div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-4 panel panel-primary" style="min-height: 437px;">
-      <h5> Synth controls </h5>
-      <div> volume </div>
-      <div id="synth-vol"></div>
-      <div> echo mix </div>
-      <div id="echo"></div>
-      <span id="synth-delay-time"></span>
-      <span id="scale-select"></span>
-      <br>
-
-
-      <div> filter </div>
-      <div id="synth-filter"></div>
-      <div> phaser </div>
-      <div id="phaser-Slider"></div>
-
-      <div> oscillator type </div>
-      <div id="osc-button"></div>
-
-
-      <input id = "synth_pattern_title" style="background-color: #222" type = "text" name = "title" placeholder = "Title"/>
-      <input id = "synth_pattern_description" type = "text" name = "description" placeholder = "Description"/>
-      <div id = "synth_patternSelection">
-        <input id = "synth_pattern0" name = "synth_pattern" type = "radio" checked/>
-
-        <input id = "synth_pattern1" name = "synth_pattern" type = "radio" />
-
-        <input id = "synth_pattern2" name = "synth_pattern" type = "radio" />
-
-        <input id = "synth_pattern3" name = "synth_pattern" type = "radio" />
-
-
-      {{#if cur_user}}
-        {{#each synth_patterns}}
-          <input id = "synth_patternId{{@index}}" name = "synth_patternId" type = "hidden" value = "{{this.id}}"/>
-        {{/each}}
-          <div id = "synth_save_btn"></div>
-      {{/if}}
-
-      </div>
-
-    </div>
-    <div class="col-lg-8 panel panel-primary drum-panel" style="min-height: 437px;">
-      <div id = "steppers">
-        <div id="SO" class="step"></div>
-        <div id="S1" class="step"></div>
-        <div id="S2" class="step"></div>
-        <div id="S3" class="step"></div>
-        <div id="S4" class="step"></div>
-        <div id="S5" class="step"></div>
-        <div id="S6" class="step"></div>
-        <div id="S7" class="step"></div>
-        <div id="S8" class="step"></div>
-        <div id="S9" class="step"></div>
-        <div id="S10" class="step"></div>
-        <div id="S11" class="step"></div>
-        <div id="S12" class="step"></div>
-        <div id="S13" class="step"></div>
-        <div id="S14" class="step"></div>
-        <div id="S15" class="step"></div>
-      </div>
-      <div id = "synth"></div>
-      <div id = "synthIds">
-        <div id = "synthId">C4</div>
-        <div id = "synthId">B3</div>
-        <div id = "synthId">A3</div>
-        <div id = "synthId">G3</div>
-        <div id = "synthId">F3</div>
-        <div id = "synthId">E3</div>
-        <div id = "synthId">D3</div>
-        <div id = "synthId">C3</div>
-      </div>
-      <div class="step-numbers">
-        <strong style="margin-left:14px;">01</strong>
-        <span>02 03 04</span>
-        <strong>05</strong>
-        <span >06 07 08</span>
-        <strong>09</strong>
-        <span >10 11 12</span>
-        <strong>13</strong>
-        <span >14 15 16</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-
-    <div class="col-lg-4 panel panel-primary" style="min-height: 290px;">
-      <h5>Drum controls</h5>
-      <div> volume </div>
-      <div id="drum-vol"></div>
-      <div> echo mix </div>
-      <div id="echo-drums"></div>
-      <span id="drum-delay-time"></span>
-      <div> filter </div>
-      <div id="drums-filter"></div>
-
+        <div id = "tempo-slider">
+          <div id = "tempodisplay"></div>
+        </div>
         <br>
-        <input id = "beat_title" type = "text" name = "title" placeholder = "Title"/>
-        <input id = "beat_description" type = "text" name = "description" placeholder = "Description"/>
-        <div id = "beatSelection">
-          <input id = "beat0" name = "beat" type = "radio" checked/>
+        <br>
+        <div id = "button"></div>
+        <div id = "record"></div>
+        <ul id="recordingslist"></ul>
+      </div>
+      <div class="col-lg-4 panel panel-primary drum-panel" style="min-height: 200px;">
+        <h5>Visualizer</h5>
+        <div id="oscilloscope"></div>
+      </div>
+    </div>
+  </div>
 
-          <input id = "beat1" name = "beat" type = "radio" />
+  <div class="synth row">
+    <div style="min-height: 441px;">
+      <div class="col-lg-4 panel panel-primary" style="min-height: 437px;">
+        <h5> Synth controls </h5>
+        <div> volume </div>
+        <div id="synth-vol"></div>
+        <div> echo mix </div>
+        <div id="echo"></div>
+        <span id="synth-delay-time"></span>
+        <span id="scale-select"></span>
+        <br>
 
-          <input id = "beat2" name = "beat" type = "radio" />
+        <div> filter </div>
+        <div id="synth-filter"></div>
+        <div> phaser </div>
+        <div id="phaser-Slider"></div>
 
-          <input id = "beat3" name = "beat" type = "radio" />
+        <div> oscillator type </div>
+        <div id="osc-button"></div>
 
 
-          {{#if cur_user }}
-            {{#each beats}}
-              <input id = "beatId{{@index}}" name = "beatId" type = "hidden" value = "{{this.id}}"/>
-            {{/each}}
-              <div id = "drums_save_btn"></div>
-          {{/if}}
+        <input id = "synth_pattern_title" style="background-color: #222" type = "text" name = "title" placeholder = "Title"/>
+        <input id = "synth_pattern_description" type = "text" name = "description" placeholder = "Description"/>
+        <div id = "synth_patternSelection">
+          <input id = "synth_pattern0" name = "synth_pattern" type = "radio" checked/>
+
+          <input id = "synth_pattern1" name = "synth_pattern" type = "radio" />
+
+          <input id = "synth_pattern2" name = "synth_pattern" type = "radio" />
+
+          <input id = "synth_pattern3" name = "synth_pattern" type = "radio" />
+
+
+        {{#if cur_user}}
+          {{#each synth_patterns}}
+            <input id = "synth_patternId{{@index}}" name = "synth_patternId" type = "hidden" value = "{{this.id}}"/>
+          {{/each}}
+            <div id = "synth_save_btn"></div>
+        {{/if}}
 
         </div>
 
+      </div>
+      <div class="col-lg-8 panel panel-primary drum-panel" style="min-height: 437px;">
+        <div id = "steppers">
+          <div id="SO" class="step"></div>
+          <div id="S1" class="step"></div>
+          <div id="S2" class="step"></div>
+          <div id="S3" class="step"></div>
+          <div id="S4" class="step"></div>
+          <div id="S5" class="step"></div>
+          <div id="S6" class="step"></div>
+          <div id="S7" class="step"></div>
+          <div id="S8" class="step"></div>
+          <div id="S9" class="step"></div>
+          <div id="S10" class="step"></div>
+          <div id="S11" class="step"></div>
+          <div id="S12" class="step"></div>
+          <div id="S13" class="step"></div>
+          <div id="S14" class="step"></div>
+          <div id="S15" class="step"></div>
+        </div>
+        <div id = "synth"></div>
+        <div id = "synthIds">
+          <div id = "synthId">C4</div>
+          <div id = "synthId">B3</div>
+          <div id = "synthId">A3</div>
+          <div id = "synthId">G3</div>
+          <div id = "synthId">F3</div>
+          <div id = "synthId">E3</div>
+          <div id = "synthId">D3</div>
+          <div id = "synthId">C3</div>
+        </div>
+        <div class="step-numbers">
+          <strong style="margin-left:14px;">01</strong>
+          <span>02 03 04</span>
+          <strong>05</strong>
+          <span >06 07 08</span>
+          <strong>09</strong>
+          <span >10 11 12</span>
+          <strong>13</strong>
+          <span >14 15 16</span>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="col-lg-8 panel panel-primary drum-panel" style="min-height: 290px;">
-      <div id = "steppers">
-        <div id="DO" class="step"></div>
-        <div id="D1" class="step"></div>
-        <div id="D2" class="step"></div>
-        <div id="D3" class="step"></div>
-        <div id="D4" class="step"></div>
-        <div id="D5" class="step"></div>
-        <div id="D6" class="step"></div>
-        <div id="D7" class="step"></div>
-        <div id="D8" class="step"></div>
-        <div id="D9" class="step"></div>
-        <div id="D10" class="step"></div>
-        <div id="D11" class="step"></div>
-        <div id="D12" class="step"></div>
-        <div id="D13" class="step"></div>
-        <div id="D14" class="step"></div>
-        <div id="D15" class="step"></div>
+  <div class="drums row">
+    <div style="min-height: 294px;">
+      <div class="col-lg-4 panel panel-primary" style="min-height: 290px;">
+        <h5>Drum controls</h5>
+        <div> volume </div>
+        <div id="drum-vol"></div>
+        <div> echo mix </div>
+        <div id="echo-drums"></div>
+        <span id="drum-delay-time"></span>
+        <div> filter </div>
+        <div id="drums-filter"></div>
+
+          <br>
+          <input id = "beat_title" type = "text" name = "title" placeholder = "Title"/>
+          <input id = "beat_description" type = "text" name = "description" placeholder = "Description"/>
+          <div id = "beatSelection">
+            <input id = "beat0" name = "beat" type = "radio" checked/>
+
+            <input id = "beat1" name = "beat" type = "radio" />
+
+            <input id = "beat2" name = "beat" type = "radio" />
+
+            <input id = "beat3" name = "beat" type = "radio" />
+
+
+            {{#if cur_user }}
+              {{#each beats}}
+                <input id = "beatId{{@index}}" name = "beatId" type = "hidden" value = "{{this.id}}"/>
+              {{/each}}
+                <div id = "drums_save_btn"></div>
+            {{/if}}
+
+          </div>
+
       </div>
-      <div id = "drums"></div>
-      <div id = "drumIds">
-        <div id = "drumId">OH</div>
-        <div id = "drumId">CH</div>
-        <div id = "drumId">SD</div>
-        <div id = "drumId">BD</div>
-      </div>
-      <div class="step-numbers">
-        <strong style="margin-left:14px;">01</strong>
-        <span>02 03 04</span>
-        <strong>05</strong>
-        <span >06 07 08</span>
-        <strong>09</strong>
-        <span >10 11 12</span>
-        <strong>13</strong>
-        <span >14 15 16</span>
+
+      <div class="col-lg-8 panel panel-primary drum-panel" style="min-height: 290px;">
+        <div id = "steppers">
+          <div id="DO" class="step"></div>
+          <div id="D1" class="step"></div>
+          <div id="D2" class="step"></div>
+          <div id="D3" class="step"></div>
+          <div id="D4" class="step"></div>
+          <div id="D5" class="step"></div>
+          <div id="D6" class="step"></div>
+          <div id="D7" class="step"></div>
+          <div id="D8" class="step"></div>
+          <div id="D9" class="step"></div>
+          <div id="D10" class="step"></div>
+          <div id="D11" class="step"></div>
+          <div id="D12" class="step"></div>
+          <div id="D13" class="step"></div>
+          <div id="D14" class="step"></div>
+          <div id="D15" class="step"></div>
+        </div>
+        <div id = "drums"></div>
+        <div id = "drumIds">
+          <div id = "drumId">OH</div>
+          <div id = "drumId">CH</div>
+          <div id = "drumId">SD</div>
+          <div id = "drumId">BD</div>
+        </div>
+        <div class="step-numbers">
+          <strong style="margin-left:14px;">01</strong>
+          <span>02 03 04</span>
+          <strong>05</strong>
+          <span >06 07 08</span>
+          <strong>09</strong>
+          <span >10 11 12</span>
+          <strong>13</strong>
+          <span >14 15 16</span>
+        </div>
       </div>
     </div>
-
   </div>
 </div>
