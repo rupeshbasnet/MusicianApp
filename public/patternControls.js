@@ -171,7 +171,7 @@ document.addEventListener("keypress", function(e){
 
 });
 
-var lastActiveSeq;
+var activeSeq;
 var copiedPattern;
 
 $("#drums, #synth").on("click", seqActive);
@@ -194,7 +194,7 @@ function initSeq(){
   {
     let i = count;
     seqs[key].on('change', () => {
-      lastActiveSeq = insts[i];
+      activeSeq = insts[i];
     });
     count++;
   }
@@ -207,31 +207,31 @@ function initSeq(){
     for(let inst of insts){
       if($(el.parentNode).hasClass(inst))
         {
-          lastActiveSeq = inst;
+          activeSeq = inst;
           return;
         }
     }
-    lastActiveSeq = undefined;
+    activeSeq = undefined;
   });
 }
 
 function seqActive(e){
   let eid = e.currentTarget.id;
-  if(lastActiveSeq && lastActiveSeq !== eid){
-    lastActiveSeq = undefined;
+  if(activeSeq && activeSeq !== eid){
+    activeSeq = undefined;
   }
-  lastActiveSeq = eid;
+  activeSeq = eid;
 }
 
 function copyPattern(){
   let patternType, p;
 
-  if(!lastActiveSeq)
+  if(!activeSeq)
     return;
 
-  if(lastActiveSeq === "drums")
+  if(activeSeq === "drums")
     p = pattern_types[0];
-  else if(lastActiveSeq === "synth")
+  else if(activeSeq === "synth")
     p = pattern_types[1];
   else
     return;
@@ -246,12 +246,12 @@ function copyPattern(){
 function pastePattern(){
   let p;
 
-  if(!lastActiveSeq || !copiedPattern)
+  if(!activeSeq || !copiedPattern)
     return;
 
-  if(lastActiveSeq === "drums" && copiedPattern.length === 64)
+  if(activeSeq === "drums" && copiedPattern.length === 64)
     p = pattern_types[0];
-  else if(lastActiveSeq === "synth" && copiedPattern.length === 128)
+  else if(activeSeq === "synth" && copiedPattern.length === 128)
     p = pattern_types[1];
   else
     return;
