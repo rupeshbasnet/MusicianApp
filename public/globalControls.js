@@ -111,3 +111,18 @@ playbutton.on('change', function(v) {
 
     }
 });
+
+$(function(){
+  let globalComponents = $('.global > div > div');
+  let noComponents = globalComponents.length;
+
+  if(noComponents == 2){
+    globalComponents.css('min-width', '50%');
+  }
+  else{
+    let rowLength = parseInt($('.global').css('width'));
+    globalComponents.css('min-width', ((1/noComponents)*rowLength - noComponents));
+  }
+
+
+});
