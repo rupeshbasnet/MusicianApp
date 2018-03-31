@@ -11,6 +11,8 @@ var seqs = {
   'synth_patterns': synthSequencer,
 };
 
+var insts = ["drums", "synth"];
+
 pattern_types.forEach(e => patterns[e] = eval(e));
 
 function expand(array, rows) {
@@ -156,6 +158,7 @@ document.addEventListener("keypress", function(e){
     let input = document.getElementById('synth_pattern'+num);
 
     input.click();
+    $("#synth")[0].click();
   }
   else if(key.match(/5|6|7|8/))
   {
@@ -163,9 +166,100 @@ document.addEventListener("keypress", function(e){
     let input = document.getElementById('beat'+num);
 
     input.click();
+    $("#drums")[0].click();
   }
 
 });
 
+var activeSeq;
+var copiedPattern;
+
+$("#drums, #synth").on("click", seqActive);
+
+$(document).on("keydown", (e) => {
+  let key = e.key;
+  if(key === "c" && e.metaKey)
+  {
+    copyPattern();
+  }
+  else if(key === "v" && e.metaKey)
+  {
+    pastePattern();
+  }
+});
+
+function initSeq(){
+  let count = 0;
+  for(let key in seqs)
+  {
+    let i = count;
+    seqs[key].on('change', () => {
+      activeSeq = insts[i];
+    });
+    count++;
+  }
+
+
+  $('.row').click(function(e){
+    $('.row div').removeClass('active-row');
+    let el = $(e.currentTarget).children()[0];
+    $(el).addClass('active-row');
+    for(let inst of insts){
+      if($(el.parentNode).hasClass(inst))
+        {
+          activeSeq = inst;
+          return;
+        }
+    }
+    activeSeq = undefined;
+  });
+}
+
+function seqActive(e){
+  let eid = e.currentTarget.id;
+  if(activeSeq && activeSeq !== eid){
+    activeSeq = undefined;
+  }
+  activeSeq = eid;
+}
+
+function copyPattern(){
+  let patternType, p;
+
+  if(!activeSeq)
+    return;
+
+  if(activeSeq === "drums")
+    p = pattern_types[0];
+  else if(activeSeq === "synth")
+    p = pattern_types[1];
+  else
+    return;
+
+  patternType = p.slice(0, -1);
+
+  let s = getSelected(patternType);
+
+  copiedPattern = (patterns[p][s]).beatArray;
+}
+
+function pastePattern(){
+  let p;
+
+  if(!activeSeq || !copiedPattern)
+    return;
+
+  if(activeSeq === "drums" && copiedPattern.length === 64)
+    p = pattern_types[0];
+  else if(activeSeq === "synth" && copiedPattern.length === 128)
+    p = pattern_types[1];
+  else
+    return;
+
+  let seq = seqs[p];
+  seq.matrix.set.all(expand(copiedPattern, seq.matrix.pattern.length));
+}
+
 $(loadBeats);
 $(setupPatternControls);
+$(initSeq);
